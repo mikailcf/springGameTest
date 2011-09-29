@@ -9,6 +9,7 @@ import org.junit.Test;
 import springGameTest.model.EntityProperties;
 import springGameTest.model.Property;
 import springGameTest.model.PropertyValue;
+import springGameTest.service.PropertyCollisionAction;
 import springGameTest.service.PropertyService;
 
 public class PropertyServiceTest {
@@ -71,8 +72,9 @@ public class PropertyServiceTest {
 		long testValue2 = 44;
 		testPropertyValue = new PropertyValue(testValue1);
 		testProperties.addProperty(testName, testPropertyValue);
-		PropertyService.sumProperty(testPropertyValue,
-				new PropertyValue(testValue2));
+		PropertyService.addProperty(testProperties, testName,
+				new PropertyValue(testValue2),
+				PropertyCollisionAction.ExistingPrevails);
 		assertTrue(testPropertyValue.getIntValue() == testValue1 + testValue2);
 	}
 
