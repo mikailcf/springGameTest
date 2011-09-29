@@ -1,0 +1,62 @@
+body.primary {
+	background: url(../resources/primary_background.jpg) repeat left top; 
+}
+
+h1 {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 1.2em;
+	font-weight: normal;
+	color: Black;
+	margin: 0.4em 0.4em 0.4em 0.4em;
+}
+
+h2 {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 1.1em;
+	font-weight: normal;
+	color: Black;
+	margin: 0.4em 0.4em 0.4em 0.4em;
+}
+
+text.new {
+	font-weight: italic, bold;
+	color: Red;
+}
+
+a {
+	color: DarkSlateGray;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+a:hover {
+	color: OrangeRed;
+	font-weight: normal;
+	text-decoration: none;
+}
+
+div.page {
+	background: Wheat;
+}
+
+table.silver {
+	margin: 0.4em 0.4em 0.4em 0.4em;
+	background: Wheat;
+	border-collapse: collapse;
+}
+
+table.silver th {
+	color: DarkSlateGray;
+	background: Wheat;
+	text-align: left;
+}
+
+table.silver th,table.silver td {
+	border: 1px Peru solid;
+	padding: 0.2em;
+}
+
+.errors {
+	color: Red;
+	font-weight: bold;
+}

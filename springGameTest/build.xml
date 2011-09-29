@@ -1,0 +1,56 @@
+<?xml version="1.0" ?> 
+<project name="springGameTest" default="deploy-ant">
+
+	<property name="host" value="localhost"/>
+    <property name="username" value="juruastro"/>
+    <property name="password" value="passwordfile.txt"/>
+    <property name="port" value="4848"/>
+    <property name="appname" value="springGameTest"/>
+    <property name="glassfish_home" value="D:/glassfish3/glassfish"/>
+    <property name="project_home" value="D:/workspace/springGameTest"/>
+      
+
+	<path id="compile.classpath">
+		<fileset dir="WebContent/WEB-INF/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="init">
+		<mkdir dir="build/classes"/>
+		<mkdir dir="dist" />
+	</target>
+	
+	<target name="compile" depends="init" >
+		<javac destdir="build/classes" debug="true" srcdir="src">
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+	
+	<target name="war" depends="compile">
+		<war destfile="dist/springGameTest.war" webxml="WebContent/WEB-INF/web.xml">
+			<fileset dir="WebContent"/>
+			<lib dir="WebContent/WEB-INF/lib"/>
+			<classes dir="build/classes"/>
+		</war>
+	</target>
+	
+	<target name="clean">
+		<delete dir="dist" />
+		<delete dir="build" />
+	</target>
+	
+	<target name="undeploy-ant">
+        <exec executable="cmd" dir="${glassfish_home}/bin/">
+            <arg value="/c"/>
+            <arg value="asadmin.bat --user ${username} --passwordfile ${password} --host ${host} undeploy ${appname}" />
+        </exec>
+	</target>
+	
+    <target name="deploy-ant" depends="war,undeploy-ant">
+        <exec failonerror="true" executable="cmd" dir="${glassfish_home}/bin/">
+            <arg value="/c"/>
+            <arg value="asadmin.bat --user ${username} --passwordfile ${password} --host ${host} deploy ${project_home}/dist/${appname}.war" />
+        </exec>
+    </target> 
+</project>
