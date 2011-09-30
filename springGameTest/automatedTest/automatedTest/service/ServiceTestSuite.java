@@ -7,6 +7,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	PropertyServiceTest.class,
+	EventServiceTest.class,
 	})
 public class ServiceTestSuite {
 
