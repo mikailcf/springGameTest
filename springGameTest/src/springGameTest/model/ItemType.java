@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ItemType {
+public class ItemType implements Comparable<ItemType> {
 
 	public static final Map<String, ItemType> itemTypeList =
 			new HashMap<String, ItemType>();
@@ -98,4 +98,11 @@ public class ItemType {
 		return allTypes.containsKey(name);
 	}
 
+	public int compareTo (ItemType other) {
+		long subtraction = this.hierarchyLevel - other.hierarchyLevel;
+		if (subtraction == 0) {
+			return this.name.compareTo(other.name);
+		}
+		return (int) subtraction;
+	}
 }

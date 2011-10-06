@@ -41,6 +41,7 @@ public class CraftController {
 			@RequestParam(value="resourceId", required=true) String resourceId) {
 		CraftVO craftVO = ViewService.getCraftVOByUserId(1);
 		if (UserService.processCraftOrder(craftVO, recipeId, resourceId)) {
+			UserService.processWorkbenchSelect(craftVO, recipeId);
 			craftVO.setViewPage("craft");
 			ViewService.setCraftResult(craftVO);
 		}

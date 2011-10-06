@@ -92,9 +92,9 @@ public class GameVOTest {
 		testGameVO.getIntValue(testName4);
 	}
 
-	@Test
+	@Test (expected = NullPointerException.class)
 	public final void test09() {
-		assertTrue(testGameVO.getIntValue(testName5) == 0);
+		testGameVO.getIntValue(testName5);
 	}
 
 	@Test (expected = WrongTypeException.class)
@@ -117,7 +117,7 @@ public class GameVOTest {
 		testGameVO.getFloatValue(testName4);
 	}
 
-	@Test (expected = WrongTypeException.class)
+	@Test (expected = NullPointerException.class)
 	public final void test14() {
 		testGameVO.getFloatValue(testName5);
 	}
@@ -142,7 +142,7 @@ public class GameVOTest {
 		testGameVO.getStringValue(testName4);
 	}
 
-	@Test (expected = WrongTypeException.class)
+	@Test (expected = NullPointerException.class)
 	public final void test19() {
 		testGameVO.getStringValue(testName5);
 	}
@@ -167,7 +167,7 @@ public class GameVOTest {
 		assertTrue(testGameVO.getDateValue(testName4) == testValue4);
 	}
 
-	@Test (expected = WrongTypeException.class)
+	@Test (expected = NullPointerException.class)
 	public final void test24() {
 		testGameVO.getDateValue(testName5);
 	}

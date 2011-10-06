@@ -2,16 +2,12 @@
 		<spring:message code="game.workbench"/>
 	</h2>
 
-	<c:choose>	
-	<c:when test="${info.viewPage == 'select'}">
-<%@ include file="workbenchSelectSnippet.jsp"%>
-    </c:when>
-    <c:otherwise>
-    	<c:if test="${info.viewPage == 'craft'}">
+    <c:if test="${info.viewPage == 'craft'}">
 <%@ include file="workbenchCraftSnippet.jsp"%>
-		</c:if>
-    </c:otherwise>
-    </c:choose>
+	</c:if>	
+	<c:if test="${info.viewPage == 'select' || info.viewPage == 'craft'}">
+<%@ include file="workbenchSelectSnippet.jsp"%>
+    </c:if>
 	
 	<spring:message code="game.known.recipes"/>
 	<table class="silver">

@@ -7,10 +7,11 @@ import java.util.List;
 
 public class User {
 
+	private final long userId;
 	private final EntityProperties properties;
 	private final Inventory inventory;
 	private final Inventory recipes;
-	private final long userId;
+	private final UserSkillGroup skills;
 	private final List<Event> eventList;
 
 	public User(long userId) {
@@ -19,6 +20,7 @@ public class User {
 		properties = new EntityProperties();
 		inventory = new Inventory();
 		recipes = new Inventory();
+		skills = new UserSkillGroup();
 		eventList = new ArrayList<Event>();
 	}
 
@@ -37,6 +39,10 @@ public class User {
 	public Inventory getRecipes() {
 		return recipes;
 	}
+	
+	public UserSkillGroup getSkills() {
+		return skills;
+	}
 
 	public List<Event> getEventList() {
 		return eventList;
@@ -44,26 +50,22 @@ public class User {
 	
 	public long getIntValue(String propertyName) {
 		return properties.
-				getPropertyValueByNameWithDefault(propertyName).
-				getIntValue();
+				getPropertyValueByName(propertyName).getIntValue();
 	}
 	
 	public double getFloatValue(String propertyName) {
 		return properties.
-				getPropertyValueByNameWithDefault(propertyName).
-				getFloatValue();
+				getPropertyValueByName(propertyName).getFloatValue();
 	}
 	
 	public String getStringValue(String propertyName) {
 		return properties.
-				getPropertyValueByNameWithDefault(propertyName).
-				getStringValue();
+				getPropertyValueByName(propertyName).getStringValue();
 	}
 	
 	public Date getDateValue(String propertyName) {
 		return properties.
-				getPropertyValueByNameWithDefault(propertyName).
-				getDateValue();
+				getPropertyValueByName(propertyName).getDateValue();
 	}
 	
 	public boolean hasProperty(String propertyName) {

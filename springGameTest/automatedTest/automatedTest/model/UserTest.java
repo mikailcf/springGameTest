@@ -145,9 +145,9 @@ public class UserTest {
 		testUser.getIntValue(testName4);
 	}
 
-	@Test
+	@Test (expected = NullPointerException.class)
 	public final void test12() {
-		assertTrue(testUser.getIntValue(testName5) == 0);
+		testUser.getIntValue(testName5);
 	}
 
 	@Test (expected = WrongTypeException.class)
@@ -170,7 +170,7 @@ public class UserTest {
 		testUser.getFloatValue(testName4);
 	}
 
-	@Test (expected = WrongTypeException.class)
+	@Test (expected = NullPointerException.class)
 	public final void test17() {
 		testUser.getFloatValue(testName5);
 	}
@@ -195,7 +195,7 @@ public class UserTest {
 		testUser.getStringValue(testName4);
 	}
 
-	@Test (expected = WrongTypeException.class)
+	@Test (expected = NullPointerException.class)
 	public final void test22() {
 		testUser.getStringValue(testName5);
 	}
@@ -220,7 +220,7 @@ public class UserTest {
 		assertTrue(testUser.getDateValue(testName4) == testValue4);
 	}
 
-	@Test (expected = WrongTypeException.class)
+	@Test (expected = NullPointerException.class)
 	public final void test27() {
 		testUser.getDateValue(testName5);
 	}

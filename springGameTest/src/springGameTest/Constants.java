@@ -15,13 +15,13 @@ public class Constants {
 	public static final String overrallRating = "overall.rating";
 	public static final String expectedRating = "expected.rating";
 	
+	// Item types
 	public static final String objectName = "Object";
 	public static final String stackableName = "Stackable";
 	public static final String resourceName = "Resource";
 	public static final String metalName = "Metal";
 	public static final String weaponName = "Weapon";
 	public static final String meeleWeaponName = "Meele Weapon";
-
 	public static final String tinName = "Tin";
 	public static final String copperName = "Copper";
 	public static final String ironName = "Iron";
@@ -31,4 +31,13 @@ public class Constants {
 	public static final String daggerName = "Dagger";
 	public static final String swordName = "Sword";
 
+	//Skill names
+	public static final String skillCrafting = "Crafting";
+	public static final String skillForging = "Forging";
+	public static final String skillTailoring = "Tailoring";
+	public static final String skillWoodworking = "Woodworking";
+	public static final String skillWeaponForging = "Weapon Forging";
+	public static final String skillArmourForging = "Armour Forging";
+	public static final String skillSwordCrafting = "Sword Crafting";
+	public static final String skillDaggerCrafting = "Dagger Crafting";
 }

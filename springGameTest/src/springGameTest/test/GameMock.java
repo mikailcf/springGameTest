@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.LinkedBlockingDeque;
 
@@ -13,9 +15,11 @@ import springGameTest.model.Item;
 import springGameTest.model.Inventory;
 import springGameTest.model.ItemType;
 import springGameTest.model.Property;
+import springGameTest.model.Skill;
 import springGameTest.model.User;
 import springGameTest.service.InventoryService;
 import springGameTest.service.PropertyService;
+import springGameTest.service.SkillService;
 
 public class GameMock {
 
@@ -25,11 +29,12 @@ public class GameMock {
 	
 	private static Inventory initializeGame() {
 		initializeItemTypeHierarchy();
+		initializeSkillTypeHierarchy();
 		Inventory itemTemplate = initializeItemTemplate();
 		initializeUser(itemTemplate);
 		return initializeMarketItems(itemTemplate);
 	}
-		
+
 	private static Inventory initializeMarketItems(Inventory itemTemplate) {
 		Inventory inventory = new Inventory();
 
@@ -46,9 +51,9 @@ public class GameMock {
 	private static void initializeUser(Inventory itemTemplate) {
 		//Initializing the user for testing purposes
 		PropertyService.addProperty(user.getProperties(), new Property(Constants.name, "Smith"));
-		PropertyService.addProperty(user.getProperties(), new Property(Constants.userMoney, 1000));
-		PropertyService.addProperty(user.getProperties(), new Property(Constants.currentEnergy, 100));
-		PropertyService.addProperty(user.getProperties(), new Property(Constants.maximumEnergy, 100));
+		PropertyService.addProperty(user.getProperties(), new Property(Constants.userMoney, 1000000));
+		PropertyService.addProperty(user.getProperties(), new Property(Constants.currentEnergy, 10000));
+		PropertyService.addProperty(user.getProperties(), new Property(Constants.maximumEnergy, 10000));
 
 		InventoryService.addItem(user.getInventory(),
 				itemTemplate.getItemByName(Constants.tinName), 10);
@@ -57,6 +62,11 @@ public class GameMock {
 				itemTemplate.getItemByName(Constants.daggerName), 1);
 		InventoryService.addItem(user.getRecipes(),
 				itemTemplate.getItemByName(Constants.swordName), 1);
+		
+		SkillService.grantSkillToUser(user,
+				Skill.getSkillByName(Constants.skillSwordCrafting));
+		SkillService.grantSkillToUser(user,
+				Skill.getSkillByName(Constants.skillDaggerCrafting));
 	}
 
 	private static Inventory initializeItemTemplate() {
@@ -99,6 +109,17 @@ public class GameMock {
 	
 	/////////////////////////////////////////////////////////////////////////////////
 	
+	private static void initializeSkillTypeHierarchy() {
+		Skill crafting =		new Skill(Constants.skillCrafting,		20.0, null);
+		Skill forging =			new Skill(Constants.skillForging,		80.0, crafting);
+		Skill tailoring =		new Skill(Constants.skillTailoring,		80.0, crafting);
+		Skill woodworking =		new Skill(Constants.skillWoodworking,	80.0, crafting);
+		Skill weaponForging =	new Skill(Constants.skillWeaponForging,	10.0, forging);
+		Skill armourForging =	new Skill(Constants.skillArmourForging,	10.0, forging);
+		Skill swordCrafting =	new Skill(Constants.skillSwordCrafting,	8.0, weaponForging);
+		Skill daggerCrafting =	new Skill(Constants.skillDaggerCrafting,8.0, weaponForging);
+	}
+	
 	public static void initializeItemTypeHierarchy () {
 		
 		ItemType itemType = new ItemType(Constants.objectName);
@@ -121,27 +142,27 @@ public class GameMock {
 
 		itemType = new ItemType(Constants.tinName);
 		itemType.getParentTypes().add(Constants.metalName);
-		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 12));
+		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 10));
 
 		itemType = new ItemType(Constants.copperName);
 		itemType.getParentTypes().add(Constants.metalName);
-		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 23));
+		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 14));
 
 		itemType = new ItemType(Constants.ironName);
 		itemType.getParentTypes().add(Constants.metalName);
-		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 54));
+		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 17));
 
 		itemType = new ItemType(Constants.steelName);
 		itemType.getParentTypes().add(Constants.metalName);
-		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 205));
+		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 20));
 
 		itemType = new ItemType(Constants.titaniumName);
 		itemType.getParentTypes().add(Constants.metalName);
-		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 1006));
+		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 41));
 
 		itemType = new ItemType(Constants.mithrilName);
 		itemType.getParentTypes().add(Constants.metalName);
-		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 10007));
+		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.craftMultiplier, 110));
 
 		itemType = new ItemType(Constants.daggerName);
 		itemType.getParentTypes().add(Constants.meeleWeaponName);
@@ -167,7 +188,7 @@ public class GameMock {
 		queue.add(Constants.objectName);
 
 		List<String> requirements;
-		while(!(queue.isEmpty())) {
+		while(!queue.isEmpty()) {
 			String currentTypeName = queue.poll();
 
 			processItemType(currentTypeName);
@@ -195,14 +216,18 @@ public class GameMock {
 
 		EntityProperties parentAllProperties;
 		Map<String, Object> parentAllTypes;
-		
+
+		Queue<ItemType> parentTypesQueue = new PriorityQueue<ItemType>();
 		for (String parentTypeName: currentType.getParentTypes()) {
-			parentType = ItemType.itemTypeList.get(parentTypeName);
+			parentTypesQueue.offer(ItemType.itemTypeList.get(parentTypeName));
+		}
+		
+		while (!parentTypesQueue.isEmpty()) {
+			parentType = parentTypesQueue.poll();
 			parentAllProperties = parentType.getAllProperties();
 			parentAllTypes = parentType.getAllTypes();
 			
 			maxParentLevel = Math.max(maxParentLevel, parentType.getHierarchyLevel());
-			
 			for (String parentPropertyName: parentAllProperties.keySet()) {
 				currentAllProperties.remove(parentPropertyName);
 				currentAllProperties.addProperty(parentPropertyName, 
@@ -225,7 +250,6 @@ public class GameMock {
 		currentAllTypes.put(currentTypeName, null);
 		currentType.setHierarchyLevel(maxParentLevel + 1);
 	}
-		
 	///////////////////////////////////////////////////////////////////////////
 	
 	

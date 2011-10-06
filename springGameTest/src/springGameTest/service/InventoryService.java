@@ -6,6 +6,7 @@ import springGameTest.model.EntityProperties;
 import springGameTest.model.Inventory;
 import springGameTest.model.Item;
 import springGameTest.model.Property;
+import springGameTest.model.UserSkillGroup;
 import springGameTest.test.GameMock;
 
 public class InventoryService {
@@ -107,7 +108,7 @@ public class InventoryService {
 	}
 
 	public static boolean processCraftOrder(CraftVO craftVO,
-			Inventory inventory, Item recipe, Item resource) {
+			Inventory inventory, Item recipe, Item resource, UserSkillGroup skills) {
 		long resourcesNeeded = getResourcesNeeded(recipe);
 
 		if (resource.isTypeOrSubType(Constants.resourceName) &&
@@ -116,8 +117,15 @@ public class InventoryService {
 			EntityProperties properties = craftedItem.getProperties();
 			craftedItem.setName(resource.getName() + " " + recipe.getName());
 
-			double expectedResult = 2*resourcesNeeded*
+			double skillRating = SkillService.getSkillRating(skills, recipe);
+			
+			double basePrice = resourcesNeeded*resource.getValue();
+			double expectedResult = resourcesNeeded*skillRating*
 					resource.getIntValue(Constants.craftMultiplier);
+			
+			if (expectedResult > basePrice) {
+				expectedResult = basePrice + Math.log(expectedResult - basePrice);
+			}
 
 			double damage = getRandomRating(expectedResult);
 			double handling = getRandomRating(expectedResult);
@@ -125,7 +133,7 @@ public class InventoryService {
 			double style = getRandomRating(expectedResult);
 			double average = (damage + handling + durability + style)/4;
 
-			craftedItem.setValue((long) Math.ceil(average));
+			craftedItem.setValue((long) Math.ceil(2*average));
 			PropertyService.addProperty(properties,
 					new Property(Constants.damage, damage));
 			PropertyService.addProperty(properties,
@@ -142,6 +150,7 @@ public class InventoryService {
 			inventory.addItem(craftedItem, getItemName(craftedItem));
 			craftVO.setCraftedItem(craftedItem);
 
+			SkillService.increaseSkill(skills, recipe, average);
 			addQuantityToItem(inventory, resource, -resourcesNeeded);
 			return true;
 		}

@@ -174,7 +174,7 @@ public class UserService {
 				PropertyCollisionAction.Sum);
 		
 		if(InventoryService.processCraftOrder(craftVO, user.getInventory(),
-				recipe, resource)) {
+				recipe, resource, user.getSkills())) {
 			Item craftedItem = craftVO.getCraftedItem();
 			EventService.addEventToUser(user, "Crafted one " + 
 					InventoryService.getItemName(craftedItem) + " worth of $" + 
