@@ -8,6 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	PropertyServiceTest.class,
 	EventServiceTest.class,
+	InventoryServiceTest.class,
 	})
 public class ServiceTestSuite {
 

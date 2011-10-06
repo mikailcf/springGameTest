@@ -30,6 +30,10 @@ public class EntityProperties {
 		propertyList.clear();
 	}
 	
+	public void remove(String propertyName) {
+		propertyList.remove(propertyName);
+	}
+	
 	public void copy(EntityProperties newProperties) {
 		for (String propertyName: propertyList.keySet()) {
 			newProperties.addProperty(propertyName, propertyList.get(propertyName).copy());

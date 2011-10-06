@@ -102,7 +102,7 @@ public class UserService {
 			PropertyService.addProperty(user.getProperties(),
 					new Property(Constants.userMoney, orderValue),
 					PropertyCollisionAction.Sum);
-			InventoryService.addItemQuantity(user.getInventory(), item, -sellingQuantity);
+			InventoryService.addQuantityToItem(user.getInventory(), item, -sellingQuantity);
 			EventService.addEventToUser(user, "" + sellingQuantity + "x " +
 					InventoryService.getItemName(item) + " sold for $" + orderValue);
 		}

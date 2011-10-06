@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import springGameTest.service.InventoryService;
-
 public class Inventory {
 
 	private final Map<Integer, Item> itemList;
@@ -29,6 +27,10 @@ public class Inventory {
 		return itemListByName.get(itemName);
 	}
 
+	public void addItem(Item newItem) {
+		addItem(newItem, newItem.getName());
+	}
+
 	public void addItem(Item newItem, String newItemName) {
 		itemList.put(new Integer(""+newItem.getItemId()), newItem);
 		itemListByName.put(newItemName, newItem);
@@ -39,7 +41,7 @@ public class Inventory {
 	}
 
 	public void removeById(Integer itemId) {
-		itemListByName.remove(InventoryService.getItemName(itemList.get(itemId)));
+		itemListByName.remove(itemList.get(itemId).getName());
 		itemList.remove(itemId);
 	}
 

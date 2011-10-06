@@ -22,7 +22,7 @@
 		<c:forEach items="${info.getRecipeList()}" var="inventoryEntry">
 			<tr>
 			<form action="workbenchSelect.html" method="get">
-				<td>${inventoryEntry.getStringValue("name")}</td>
+				<td>${inventoryEntry.name}</td>
 				<td>${inventoryEntry.getIntValue("resources.needed")}</td>
 				<td>
 					<input type="hidden" name="recipeId" value=${inventoryEntry.itemId} />

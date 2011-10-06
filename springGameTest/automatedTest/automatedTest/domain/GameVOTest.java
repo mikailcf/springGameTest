@@ -174,12 +174,11 @@ public class GameVOTest {
 
 	@Test
 	public final void test25() {
-		Item testItem1 = new Item();
-		Item testItem2 = new Item();
-		PropertyService.addProperty(testItem1.getProperties(), 
-				new Property(Constants.name, testName1));
-		PropertyService.addProperty(testItem2.getProperties(), 
-				new Property(Constants.name, testName2));
+		String testItemType = Constants.objectName;
+		Item testItem1 = new Item(testItemType);
+		Item testItem2 = new Item(testItemType);
+		testItem1.setName(testName1);
+		testItem2.setName(testName2);
 		testUser.getInventory().addItem(testItem1, InventoryService.getItemName(testItem1));
 		testUser.getInventory().addItem(testItem2, InventoryService.getItemName(testItem2));
 		assertTrue(testGameVO.getItemList().contains(testItem1));
@@ -187,12 +186,11 @@ public class GameVOTest {
 
 	@Test
 	public final void test26() {
-		Item testItem1 = new Item();
-		Item testItem2 = new Item();
-		PropertyService.addProperty(testItem1.getProperties(), 
-				new Property(Constants.name, testName1));
-		PropertyService.addProperty(testItem2.getProperties(), 
-				new Property(Constants.name, testName2));
+		String testItemType = Constants.objectName;
+		Item testItem1 = new Item(testItemType);
+		Item testItem2 = new Item(testItemType);
+		testItem1.setName(testName1);
+		testItem2.setName(testName2);
 		testUser.getRecipes().addItem(testItem1, InventoryService.getItemName(testItem1));
 		testUser.getRecipes().addItem(testItem2, InventoryService.getItemName(testItem2));
 		assertTrue(testGameVO.getRecipeList().contains(testItem2));
@@ -200,15 +198,13 @@ public class GameVOTest {
 
 	@Test
 	public final void test27() {
-		Item testItem1 = new Item();
-		Item testItem2 = new Item();
-		Item testItem3 = new Item();
-		PropertyService.addProperty(testItem1.getProperties(), 
-				new Property(Constants.name, testName1));
-		PropertyService.addProperty(testItem2.getProperties(), 
-				new Property(Constants.name, testName2));
-		PropertyService.addProperty(testItem3.getProperties(), 
-				new Property(Constants.name, testName3));
+		String testItemType = Constants.objectName;
+		Item testItem1 = new Item(testItemType);
+		Item testItem2 = new Item(testItemType);
+		Item testItem3 = new Item(testItemType);
+		testItem1.setName(testName1);
+		testItem2.setName(testName2);
+		testItem3.setName(testName3);
 		InventoryService.addItem(testUser.getInventory(), testItem1);
 		InventoryService.addItem(testUser.getInventory(), testItem2);
 		assertFalse(testGameVO.getItemList().contains(testItem3));

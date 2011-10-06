@@ -71,12 +71,11 @@ public class UserTest {
 
 	@Test
 	public final void test03() {
-		Item testItem1 = new Item();
-		Item testItem2 = new Item();
-		PropertyService.addProperty(testItem1.getProperties(), 
-				new Property(Constants.name, testName1));
-		PropertyService.addProperty(testItem2.getProperties(), 
-				new Property(Constants.name, testName2));
+		String testItemType = Constants.objectName;
+		Item testItem1 = new Item(testItemType);
+		Item testItem2 = new Item(testItemType);
+		testItem1.setName(testName1);
+		testItem2.setName(testName2);
 		testRecipes.addItem(testItem1, InventoryService.getItemName(testItem1));
 		testUser.getRecipes().addItem(testItem1, InventoryService.getItemName(testItem1));
 		testRecipes.addItem(testItem2, InventoryService.getItemName(testItem2));
@@ -86,12 +85,11 @@ public class UserTest {
 
 	@Test
 	public final void test04() {
-		Item testItem1 = new Item();
-		Item testItem2 = new Item();
-		PropertyService.addProperty(testItem1.getProperties(), 
-				new Property(Constants.name, testName1));
-		PropertyService.addProperty(testItem2.getProperties(), 
-				new Property(Constants.name, testName2));
+		String testItemType = Constants.objectName;
+		Item testItem1 = new Item(testItemType);
+		Item testItem2 = new Item(testItemType);
+		testItem1.setName(testName1);
+		testItem2.setName(testName2);
 		testRecipes.addItem(testItem1, InventoryService.getItemName(testItem1));
 		testUser.getRecipes().addItem(testItem1, InventoryService.getItemName(testItem1));
 		testRecipes.addItem(testItem2, InventoryService.getItemName(testItem2));

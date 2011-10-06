@@ -1,5 +1,5 @@
 	<spring:message code="game.you.crafted.one"/>
-	${info.craftedItem.getStringValue("name")}<br>
+	${info.craftedItem.name}<br>
 	<table class="silver">
 		<tr>
 			<th width="200"><spring:message code="game.name"/></th>

@@ -9,8 +9,7 @@ import org.junit.Test;
 import springGameTest.Constants;
 import springGameTest.model.Inventory;
 import springGameTest.model.Item;
-import springGameTest.model.Property;
-import springGameTest.service.PropertyService;
+import springGameTest.test.GameMock;
 
 public class InventoryTest {
 
@@ -20,16 +19,16 @@ public class InventoryTest {
 	private String testName1 = "testName1";
 	private String testName2 = "testName2";
 	private String testName3 = "testName3";
-	private Item testItem1 = new Item(testItemID1);
-	private Item testItem2 = new Item(testItemID2);
-	private Property testItemName1 = new Property(Constants.name, testName1);
-	private Property testItemName2 = new Property(Constants.name, testName2);
+	private String testItemType = Constants.objectName;
+	private Item testItem1;
+	private Item testItem2;
 	private Inventory testInventory = new Inventory();
 	
 	@Before
 	public void setUp() {
-		PropertyService.addProperty(testItem1.getProperties(), testItemName1);
-		PropertyService.addProperty(testItem2.getProperties(), testItemName2);
+		GameMock.initializeItemTypeHierarchy();
+		testItem1 = new Item(testItemType, testItemID1, testName1);
+		testItem2 = new Item(testItemType, testItemID2, testName2);
 		testInventory.addItem(testItem1, testName1);
 		testInventory.addItem(testItem2, testName2);
 	}
@@ -152,9 +151,8 @@ public class InventoryTest {
 
 	@Test
 	public final void test21() {
-		Item testItem3 = new Item(testItemID3);
-		PropertyService.addProperty(testItem3.getProperties(),
-				new Property(Constants.name, testName3));
+		Item testItem3 = new Item(testItemType, testItemID3);
+		testItem3.setName(testName3);
 		assertFalse(testInventory.getItemList().contains(testItem3));
 	}
 
@@ -186,9 +184,8 @@ public class InventoryTest {
 		Inventory testInventory2 = new Inventory();
 		testInventory2.addItem(testItem1, testName1);
 		testInventory2.addItem(testItem2, testName2);
-		Item testItem3 = new Item(testItemID3);
-		PropertyService.addProperty(testItem3.getProperties(),
-				new Property(Constants.name, testName3));
+		Item testItem3 = new Item(testItemType, testItemID3);
+		testItem3.setName(testName3);
 		testInventory2.addItem(testItem3, testName3);
 		assertFalse(testInventory.equals(testInventory2));
 	}

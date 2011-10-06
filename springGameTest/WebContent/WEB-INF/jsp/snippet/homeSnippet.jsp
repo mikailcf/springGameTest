@@ -10,9 +10,9 @@
 		</tr>
 		<c:forEach items="${info.getItemList()}" var="inventoryEntry">
 			<tr>
-				<td>${inventoryEntry.getStringValue("name")}</td>
+				<td>${inventoryEntry.name}</td>
 				<td>$${info.getSellValue(inventoryEntry)}</td>
-				<td>${inventoryEntry.getIntValue("quantity")}</td>
+				<td>${inventoryEntry.quantity}</td>
 			</tr>
 		</c:forEach>
 	</table>
@@ -24,7 +24,7 @@
 		</tr>
 		<c:forEach items="${info.getRecipeList()}" var="inventoryEntry">
 			<tr>
-				<td>${inventoryEntry.getStringValue("name")}</td>
+				<td>${inventoryEntry.name}</td>
 				<td>${inventoryEntry.getIntValue("resources.needed")}</td>
 			</tr>
 		</c:forEach>

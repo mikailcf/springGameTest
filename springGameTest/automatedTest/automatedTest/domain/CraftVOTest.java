@@ -38,9 +38,9 @@ public class CraftVOTest {
 	@Test
 	public final void test03() {
 		String testName = "testName";
-		Item testItem = new Item();
-		PropertyService.addProperty(testItem.getProperties(),
-				new Property(Constants.name, testName));
+		String testItemType = Constants.objectName;
+		Item testItem = new Item(testItemType);
+		testItem.setName(testName);
 		testCraftVO.getAvailableResources().addItem(testItem, testName);
 		assertTrue(testCraftVO.getAvailableResourceList().contains(testItem));
 	}
@@ -59,14 +59,16 @@ public class CraftVOTest {
 
 	@Test
 	public final void test06() {
-		Item testItem = new Item();
+		String testItemType = Constants.objectName;
+		Item testItem = new Item(testItemType);
 		testCraftVO.setSelectedRecipe(testItem);
 		assertTrue(testCraftVO.getSelectedRecipe().equals(testItem));
 	}
 
 	@Test
 	public final void test07() {
-		Item testItem = new Item();
+		String testItemType = Constants.objectName;
+		Item testItem = new Item(testItemType);
 		testCraftVO.setCraftedItem(testItem);
 		assertTrue(testCraftVO.getCraftedItem().equals(testItem));
 	}
@@ -77,7 +79,8 @@ public class CraftVOTest {
 		double testFloatValue = 97.0;
 		long testIntValue = (long) testFloatValue;
 		double expectedValue = 100;
-		Item testItem = new Item();
+		String testItemType = Constants.objectName;
+		Item testItem = new Item(testItemType);
 		PropertyService.addProperty(testItem.getProperties(),
 				new Property(testPropertyName, testFloatValue));
 		PropertyService.addProperty(testItem.getProperties(),
@@ -91,7 +94,8 @@ public class CraftVOTest {
 		String testPropertyName = "testPropertyName";
 		double testFloatValue = 97.0;
 		double expectedValue = 100;
-		Item testItem = new Item();
+		String testItemType = Constants.objectName;
+		Item testItem = new Item(testItemType);
 		PropertyService.addProperty(testItem.getProperties(),
 				new Property(testPropertyName, testFloatValue));
 		PropertyService.addProperty(testItem.getProperties(),

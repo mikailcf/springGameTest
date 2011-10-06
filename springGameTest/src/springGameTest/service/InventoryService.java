@@ -6,17 +6,16 @@ import springGameTest.model.EntityProperties;
 import springGameTest.model.Inventory;
 import springGameTest.model.Item;
 import springGameTest.model.Property;
-import springGameTest.model.PropertyValue;
 import springGameTest.test.GameMock;
 
 public class InventoryService {
 
 	public static long getItemQuantity(Item item) {
-		return item.getIntValue(Constants.quantity);
+		return item.getQuantity();
 	}
 
 	public static String getItemName(Item item) {
-		return item.getStringValue(Constants.name);
+		return item.getName();
 	}
 
 	public static long getResourcesNeeded(Item item) {
@@ -24,11 +23,11 @@ public class InventoryService {
 	}
 	
 	public static long getBuyValue(Item item, double multiplier) {
-		return (long) Math.ceil(multiplier*item.getIntValue(Constants.itemValue));
+		return (long) Math.ceil(multiplier*item.getValue());
 	}
 	
 	public static long getSellValue(Item item, double multiplier) {
-		return (long) Math.ceil(multiplier*item.getIntValue(Constants.itemValue)/2);
+		return (long) Math.ceil(multiplier*item.getValue()/2);
 	}
 	
 	public static double getRandomRating(double mean) {
@@ -37,11 +36,20 @@ public class InventoryService {
 		return result;
 	}
 
+	public static long getAbsoluteValue(Item craftedItem, String propertyName) {
+		return (long) Math.ceil(craftedItem.getFloatValue(propertyName));
+	}
+
+	public static String getPercentageValue(Item craftedItem, String propertyName) {
+		double dividend = craftedItem.getFloatValue(propertyName);
+		double divisor = craftedItem.getFloatValue(Constants.expectedRating);
+		divisor = divisor == 0 ? (dividend == 0 ? 1 : dividend) : divisor;
+		return ""+ (long) Math.ceil(100*dividend/divisor) + "%";
+	}
+
 	public static void addItem(Inventory inventory, Item newItem, long itemQuantity) {
 		Item itemCopy = newItem.copyNewId();
-		PropertyService.addProperty(itemCopy.getProperties(),
-				new Property(Constants.quantity, itemQuantity),
-				PropertyCollisionAction.NewPrevails);
+		itemCopy.setQuantity(itemQuantity);
 		addItem(inventory, itemCopy, ItemCollisionAction.Include);
 	}
 
@@ -50,18 +58,18 @@ public class InventoryService {
 	}
 
 	public static void addItem(Inventory inventory, Item newItem, ItemCollisionAction action) {
-		String itemName = newItem.getStringValue(Constants.name);
+		String itemName = getItemName(newItem);
 		Item currentItem = inventory.getItemByName(itemName);
 		if (currentItem == null) { action = ItemCollisionAction.Include; }
 		else if (action == ItemCollisionAction.Include &&
-				"true".equals(currentItem.getStringValue(Constants.stackable))) {
+				currentItem.isTypeOrSubType(Constants.stackableName)) {
 			action = ItemCollisionAction.Stack;
 		}
 		switch (action) {
 		case ExistingPrevails:
 			break;
 		case Stack:
-			addItemQuantity(inventory, currentItem, newItem.getIntValue(Constants.quantity));
+			addQuantityToItem(inventory, currentItem, getItemQuantity(newItem));
 			break;
 		case NewPrevails:
 			inventory.removeById(currentItem.getItemId());
@@ -76,9 +84,8 @@ public class InventoryService {
 		}
 	}
 	
-	public static void addItemQuantity(Inventory inventory, Item item, long itemQuantity) {
-		PropertyService.addProperty(item.getProperties(), Constants.quantity,
-				new PropertyValue(itemQuantity), PropertyCollisionAction.Sum);
+	public static void addQuantityToItem(Inventory inventory, Item item, long itemQuantity) {
+		item.setQuantity(item.getQuantity() + itemQuantity) ;
 		if (getItemQuantity(item) <= 0) {
 			inventory.removeById(item.getItemId());
 		}
@@ -91,7 +98,7 @@ public class InventoryService {
 		Inventory availableResources = craftVO.getAvailableResources();
 		
 		for (Item resource: inventory.getItemList()) {
-			if (resource.hasProperty(Constants.isResource) &&
+			if (resource.isTypeOrSubType(Constants.resourceName) &&
 					resourcesNeeded <= getItemQuantity(resource)) {
 				availableResources.addItem(resource, getItemName(resource));
 			}
@@ -103,15 +110,11 @@ public class InventoryService {
 			Inventory inventory, Item recipe, Item resource) {
 		long resourcesNeeded = getResourcesNeeded(recipe);
 
-		if (resource.hasProperty(Constants.isResource) &&
+		if (resource.isTypeOrSubType(Constants.resourceName) &&
 				resourcesNeeded <= getItemQuantity(resource)) {
 			Item craftedItem = recipe.copyNewId();
 			EntityProperties properties = craftedItem.getProperties();
-			PropertyService.addProperty(properties,
-					new Property(Constants.name,
-							resource.getStringValue(Constants.name) + " " +
-							recipe.getStringValue(Constants.name)),
-					PropertyCollisionAction.NewPrevails);
+			craftedItem.setName(resource.getName() + " " + recipe.getName());
 
 			double expectedResult = 2*resourcesNeeded*
 					resource.getIntValue(Constants.craftMultiplier);
@@ -122,10 +125,7 @@ public class InventoryService {
 			double style = getRandomRating(expectedResult);
 			double average = (damage + handling + durability + style)/4;
 
-			PropertyService.addProperty(properties,
-					new Property(Constants.itemValue,
-					(long) Math.ceil(average)),
-					PropertyCollisionAction.NewPrevails);
+			craftedItem.setValue((long) Math.ceil(average));
 			PropertyService.addProperty(properties,
 					new Property(Constants.damage, damage));
 			PropertyService.addProperty(properties,
@@ -139,25 +139,14 @@ public class InventoryService {
 			PropertyService.addProperty(properties,
 					new Property(Constants.expectedRating, expectedResult));
 
-			
 			inventory.addItem(craftedItem, getItemName(craftedItem));
 			craftVO.setCraftedItem(craftedItem);
 
-			addItemQuantity(inventory, resource, -resourcesNeeded);
+			addQuantityToItem(inventory, resource, -resourcesNeeded);
 			return true;
 		}
 		
 		return false;
-	}
-
-	public static long getAbsoluteValue(Item craftedItem, String propertyName) {
-		return (long) Math.ceil(craftedItem.getFloatValue(propertyName));
-	}
-
-	public static String getPercentageValue(Item craftedItem, String propertyName) {
-		return ""+ (long) Math.ceil(
-				100*craftedItem.getFloatValue(propertyName)/
-				craftedItem.getFloatValue(Constants.expectedRating)) + "%";
 	}
 	
 }

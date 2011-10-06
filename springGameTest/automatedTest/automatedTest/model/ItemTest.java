@@ -8,16 +8,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import springGameTest.Constants;
 import springGameTest.model.EntityProperties;
 import springGameTest.model.Item;
 import springGameTest.model.Property;
 import springGameTest.model.WrongTypeException;
 import springGameTest.service.PropertyService;
+import springGameTest.test.GameMock;
 
 public class ItemTest {
-	
+
 	private long testItemId = 65;
-	private Item testItem = new Item(testItemId);
+	private String testItemType = Constants.objectName;
+	private Item testItem;
 	private String testName1 = "testName1";
 	private String testName2 = "testName2";
 	private String testName3 = "testName3";
@@ -34,6 +37,8 @@ public class ItemTest {
 	
 	@Before
 	public void setUp() {
+		GameMock.initializeItemTypeHierarchy();
+		testItem = new Item(testItemType, testItemId);
 		PropertyService.addProperty(testItem.getProperties(), testProperty1);
 		PropertyService.addProperty(testItem.getProperties(), testProperty2);
 		PropertyService.addProperty(testItem.getProperties(), testProperty3);
@@ -107,9 +112,9 @@ public class ItemTest {
 		testItem.getIntValue(testName4);
 	}
 
-	@Test
+	@Test (expected = NullPointerException.class)
 	public final void test12() {
-		assertTrue(testItem.getIntValue(testName5) == 0);
+		testItem.getIntValue(testName5);
 	}
 
 	@Test (expected = WrongTypeException.class)
@@ -132,7 +137,7 @@ public class ItemTest {
 		testItem.getFloatValue(testName4);
 	}
 
-	@Test (expected = WrongTypeException.class)
+	@Test (expected = NullPointerException.class)
 	public final void test17() {
 		testItem.getFloatValue(testName5);
 	}
@@ -157,7 +162,7 @@ public class ItemTest {
 		testItem.getStringValue(testName4);
 	}
 
-	@Test (expected = WrongTypeException.class)
+	@Test (expected = NullPointerException.class)
 	public final void test22() {
 		testItem.getStringValue(testName5);
 	}
@@ -182,7 +187,7 @@ public class ItemTest {
 		assertTrue(testItem.getDateValue(testName4) == testValue4);
 	}
 
-	@Test (expected = WrongTypeException.class)
+	@Test (expected = NullPointerException.class)
 	public final void test27() {
 		testItem.getDateValue(testName5);
 	}

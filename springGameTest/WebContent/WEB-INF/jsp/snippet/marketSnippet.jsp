@@ -11,9 +11,9 @@
 		<c:forEach items="${info.getItemList()}" var="inventoryEntry">
 			<tr>
 			<form action="marketSell.html" method="get">
-				<td>${inventoryEntry.getStringValue("name")}</td>
+				<td>${inventoryEntry.name}</td>
 				<td>$${info.getSellValue(inventoryEntry)}</td>
-				<td>${inventoryEntry.getIntValue("quantity")}</td>
+				<td>${inventoryEntry.quantity}</td>
 				<td>
 					<input type="hidden" name="itemId" value=${inventoryEntry.itemId} />
 					<input type="submit" value=<spring:message code="game.sell"/> />
@@ -32,7 +32,7 @@
 		<c:forEach items="${info.getMarketItemList()}" var="marketEntry">
 			<tr>
 			<form action="marketBuy.html" method="get">
-				<td>${marketEntry.getStringValue("name")}</td>
+				<td>${marketEntry.name}</td>
 				<td>$${info.getBuyValue(marketEntry)}</td>
 				<td><input type="text" name="buyingQuantity" size="7" maxlength="6"/></td>
 				<td>

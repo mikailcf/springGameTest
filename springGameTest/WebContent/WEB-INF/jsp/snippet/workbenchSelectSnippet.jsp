@@ -1,5 +1,5 @@
 	<spring:message code="game.you.are.about.to.craft.one"/>
-	${info.selectedRecipe.getStringValue("name")}<br>
+	${info.selectedRecipe.name}<br>
 	<spring:message code="game.available.resources"/>
 	<table class="silver">
 		<tr>
@@ -10,9 +10,9 @@
 		<c:forEach items="${info.getAvailableResourceList()}" var="inventoryEntry">
 			<tr>
 			<form action="workbenchCraft.html" method="get">
-				<td>${inventoryEntry.getStringValue("name")}</td>
+				<td>${inventoryEntry.name}</td>
 				<td>$${info.getSellValue(inventoryEntry)}</td>
-				<td>${inventoryEntry.getIntValue("quantity")}</td>
+				<td>${inventoryEntry.quantity}</td>
 				<td>
 					<input type="hidden" name="recipeId"
 						value=${info.selectedRecipe.itemId} />
