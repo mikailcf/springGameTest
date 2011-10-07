@@ -8,6 +8,8 @@ import springGameTest.model.Event;
 import springGameTest.model.Inventory;
 import springGameTest.model.Item;
 import springGameTest.model.User;
+import springGameTest.model.UserSkill;
+import springGameTest.model.UserSkillGroup;
 import springGameTest.service.EventService;
 import springGameTest.service.UserService;
 
@@ -47,6 +49,14 @@ public class GameVO {
 
 	public Collection<Item> getRecipeList() {
 		return user.getRecipes().getItemList();
+	}
+
+	public UserSkillGroup getSkills() {
+		return user.getSkills();
+	}
+
+	public Collection<UserSkill> getSkillList() {
+		return user.getSkills().values();
 	}
 
 	public Collection<Event> getEventList() {

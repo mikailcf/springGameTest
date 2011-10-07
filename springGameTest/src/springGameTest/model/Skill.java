@@ -56,4 +56,10 @@ public class Skill {
 		return parentSkill == null ? null : parentSkill.getName();
 	}
 	
+	public String toString() {
+		return "skillId: " + skillId + ", name: " + name +
+				", difficulty: " + difficulty +
+				", parentSkillName: " + getParentSkillName();
+	}
+	
 }

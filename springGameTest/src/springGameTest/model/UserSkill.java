@@ -37,5 +37,9 @@ public class UserSkill {
 	public void setRating(double rating) {
 		this.rating = rating;
 	}
+	
+	public String toString() {
+		return skill.toString() + ", rating: " + rating;
+	}
 
 }

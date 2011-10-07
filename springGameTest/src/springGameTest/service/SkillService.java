@@ -6,7 +6,6 @@ import springGameTest.model.Skill;
 import springGameTest.model.User;
 import springGameTest.model.UserSkill;
 import springGameTest.model.UserSkillGroup;
-import springGameTest.test.GameMock;
 
 public class SkillService {
 	
@@ -58,16 +57,16 @@ public class SkillService {
 		double difficulty = skill.getDifficulty();
 		
 		rating = rating == 0 ? 1 : rating;
-		increaseAmount = increaseAmount == 0 ? 1 : increaseAmount;
+		increaseAmount = increaseAmount < 1 ? 1 : increaseAmount;
+		increaseAmount = Math.sqrt(increaseAmount);
 		double actualIncrease = increaseAmount/difficulty;
-		double baseIncrease = rating/difficulty;
+		double baseIncrease = rating/difficulty + 1;
 		
 		if (actualIncrease > baseIncrease) {
-			actualIncrease = baseIncrease + Math.log(actualIncrease - baseIncrease);
+			actualIncrease = baseIncrease +
+					Math.max(0, Math.log(actualIncrease - baseIncrease));
 		}
 		
-		EventService.addEventToUser(GameMock.user, "actualIncrease: "+
-				actualIncrease+"|baseIncrease: "+baseIncrease);
 		skill.setRating(rating + actualIncrease);
 	}
 	

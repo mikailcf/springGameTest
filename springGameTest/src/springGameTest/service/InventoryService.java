@@ -119,12 +119,13 @@ public class InventoryService {
 
 			double skillRating = SkillService.getSkillRating(skills, recipe);
 			
-			double basePrice = resourcesNeeded*resource.getValue();
+			double basePrice = resourcesNeeded*resource.getValue() + 1;
 			double expectedResult = resourcesNeeded*skillRating*
 					resource.getIntValue(Constants.craftMultiplier);
 			
 			if (expectedResult > basePrice) {
-				expectedResult = basePrice + Math.log(expectedResult - basePrice);
+				expectedResult = basePrice +
+						Math.max(0, Math.log(expectedResult - basePrice));
 			}
 
 			double damage = getRandomRating(expectedResult);

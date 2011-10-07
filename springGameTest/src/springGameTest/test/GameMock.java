@@ -110,12 +110,12 @@ public class GameMock {
 	/////////////////////////////////////////////////////////////////////////////////
 	
 	private static void initializeSkillTypeHierarchy() {
-		Skill crafting =		new Skill(Constants.skillCrafting,		20.0, null);
-		Skill forging =			new Skill(Constants.skillForging,		80.0, crafting);
-		Skill tailoring =		new Skill(Constants.skillTailoring,		80.0, crafting);
-		Skill woodworking =		new Skill(Constants.skillWoodworking,	80.0, crafting);
-		Skill weaponForging =	new Skill(Constants.skillWeaponForging,	10.0, forging);
-		Skill armourForging =	new Skill(Constants.skillArmourForging,	10.0, forging);
+		Skill crafting =		new Skill(Constants.skillCrafting,		60.0, null);
+		Skill forging =			new Skill(Constants.skillForging,		40.0, crafting);
+		Skill tailoring =		new Skill(Constants.skillTailoring,		40.0, crafting);
+		Skill woodworking =		new Skill(Constants.skillWoodworking,	40.0, crafting);
+		Skill weaponForging =	new Skill(Constants.skillWeaponForging,	20.0, forging);
+		Skill armourForging =	new Skill(Constants.skillArmourForging,	20.0, forging);
 		Skill swordCrafting =	new Skill(Constants.skillSwordCrafting,	8.0, weaponForging);
 		Skill daggerCrafting =	new Skill(Constants.skillDaggerCrafting,8.0, weaponForging);
 	}

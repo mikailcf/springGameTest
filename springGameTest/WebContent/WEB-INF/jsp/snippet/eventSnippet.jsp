@@ -15,3 +15,10 @@
 			${event.message}
 		</c:if><br>
 	</c:forEach>
+	
+	
+	Debug<br>
+	<c:forEach items="${info.getSkillList()}" var="skill">
+			${skill.toString()}<br>
+	</c:forEach>
+	
