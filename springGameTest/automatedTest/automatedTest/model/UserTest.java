@@ -70,34 +70,6 @@ public class UserTest {
 	}
 
 	@Test
-	public final void test03() {
-		String testItemType = Constants.objectName;
-		Item testItem1 = new Item(testItemType);
-		Item testItem2 = new Item(testItemType);
-		testItem1.setName(testName1);
-		testItem2.setName(testName2);
-		testRecipes.addItem(testItem1, InventoryService.getItemName(testItem1));
-		testUser.getRecipes().addItem(testItem1, InventoryService.getItemName(testItem1));
-		testRecipes.addItem(testItem2, InventoryService.getItemName(testItem2));
-		testUser.getRecipes().addItem(testItem2, InventoryService.getItemName(testItem2));
-		assertTrue(testUser.getInventory().equals(testInventory));
-	}
-
-	@Test
-	public final void test04() {
-		String testItemType = Constants.objectName;
-		Item testItem1 = new Item(testItemType);
-		Item testItem2 = new Item(testItemType);
-		testItem1.setName(testName1);
-		testItem2.setName(testName2);
-		testRecipes.addItem(testItem1, InventoryService.getItemName(testItem1));
-		testUser.getRecipes().addItem(testItem1, InventoryService.getItemName(testItem1));
-		testRecipes.addItem(testItem2, InventoryService.getItemName(testItem2));
-		testUser.getRecipes().addItem(testItem2, InventoryService.getItemName(testItem2));
-		assertTrue(testUser.getRecipes().equals(testRecipes));
-	}
-
-	@Test
 	public final void test05() {
 		Event testEvent1 = new Event(testName1);
 		Event testEvent2 = new Event(testName2);

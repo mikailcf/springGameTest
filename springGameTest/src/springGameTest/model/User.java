@@ -10,8 +10,8 @@ public class User {
 	private final long userId;
 	private final EntityProperties properties;
 	private final Inventory inventory;
-	private final Inventory recipes;
 	private final UserSkillGroup skills;
+	private final RecipeGroup recipes;
 	private final List<Event> eventList;
 
 	public User(long userId) {
@@ -19,7 +19,7 @@ public class User {
 
 		properties = new EntityProperties();
 		inventory = new Inventory();
-		recipes = new Inventory();
+		recipes = new RecipeGroup();
 		skills = new UserSkillGroup();
 		eventList = new ArrayList<Event>();
 	}
@@ -36,7 +36,7 @@ public class User {
 		return inventory;
 	}
 
-	public Inventory getRecipes() {
+	public RecipeGroup getRecipes() {
 		return recipes;
 	}
 	

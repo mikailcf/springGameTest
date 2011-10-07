@@ -21,7 +21,7 @@
 				<td>${inventoryEntry.name}</td>
 				<td>${inventoryEntry.getIntValue("resources.needed")}</td>
 				<td>
-					<input type="hidden" name="recipeId" value=${inventoryEntry.itemId} />
+					<input type="hidden" name="recipeId" value=${inventoryEntry.recipeId} />
 					<input type="submit" value=<spring:message code="game.select"/> />
 				</td>
 			</form>

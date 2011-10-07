@@ -5,6 +5,7 @@ import springGameTest.domain.CraftVO;
 import springGameTest.model.Inventory;
 import springGameTest.model.Item;
 import springGameTest.model.Property;
+import springGameTest.model.Recipe;
 import springGameTest.model.User;
 
 public class UserService {
@@ -114,23 +115,23 @@ public class UserService {
 
 	public static boolean processWorkbenchSelect(CraftVO craftVO, String stringRecipeId) {
 		User user = craftVO.getUser();
-		Integer itemId;
+		Integer recipeId;
 		try {
-			itemId = new Integer(stringRecipeId);
+			recipeId = new Integer(stringRecipeId);
 		} catch (Exception e) {
 			EventService.addEventToUser(user, "Recipe not found");
 			return false;
 		}
 		
-		Item item = user.getRecipes().getItemById(itemId);
-		if (item == null) {
+		Recipe recipe = user.getRecipes().getRecipe(recipeId);
+		if (recipe == null) {
 			EventService.addEventToUser(user, "Recipe not found");
 			return false;
 		}
 
-		craftVO.setSelectedRecipe(item);
+		craftVO.setSelectedRecipe(recipe);
 		
-		return InventoryService.processWorkbenchSelect(craftVO, user.getInventory(), item);
+		return InventoryService.processWorkbenchSelect(craftVO, user.getInventory(), recipe);
 	}
 
 	public static boolean processCraftOrder(CraftVO craftVO, String stringRecipeId,
@@ -143,8 +144,8 @@ public class UserService {
 			EventService.addEventToUser(user, "Recipe not found");
 			return false;
 		}
-		
-		Item recipe = user.getRecipes().getItemById(recipeId);
+
+		Recipe recipe = user.getRecipes().getRecipe(recipeId);
 		if (recipe == null) {
 			EventService.addEventToUser(user, "Recipe not found");
 			return false;
@@ -182,6 +183,11 @@ public class UserService {
 			return true;
 		}
 		return false;
+	}
+
+	public static void addRecipe(User user, Recipe recipe) {
+		user.getRecipes().addRecipe(recipe);
+		SkillService.grantSkillToUser(user, recipe.getSkill());
 	}
 
 }

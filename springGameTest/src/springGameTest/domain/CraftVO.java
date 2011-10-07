@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import springGameTest.model.Inventory;
 import springGameTest.model.Item;
+import springGameTest.model.Recipe;
 import springGameTest.model.User;
 import springGameTest.service.InventoryService;
 
@@ -12,7 +13,7 @@ public class CraftVO extends GameVO {
 
 	private final Inventory availableResources = new Inventory();
 	private String viewPage;
-	private Item selectedRecipe;
+	private Recipe selectedRecipe;
 	private Item craftedItem;
 
 	public CraftVO(User user) {
@@ -36,12 +37,12 @@ public class CraftVO extends GameVO {
 		this.viewPage = viewPage;
 	}
 	
-	public Item getSelectedRecipe() {
+	public Recipe getSelectedRecipe() {
 		return selectedRecipe;
 	}
 
-	public void setSelectedRecipe(Item selectedRecipe) {
-		this.selectedRecipe = selectedRecipe;
+	public void setSelectedRecipe(Recipe recipe) {
+		this.selectedRecipe = recipe;
 	}
 
 	public Item getCraftedItem() {

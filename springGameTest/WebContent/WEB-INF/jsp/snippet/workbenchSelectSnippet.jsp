@@ -15,7 +15,7 @@
 				<td>${inventoryEntry.quantity}</td>
 				<td>
 					<input type="hidden" name="recipeId"
-						value=${info.selectedRecipe.itemId} />
+						value=${info.selectedRecipe.recipeId} />
 					<input type="hidden" name="resourceId" value=${inventoryEntry.itemId} />
 					<input type="submit" value=<spring:message code="game.craft"/> />
 				</td>

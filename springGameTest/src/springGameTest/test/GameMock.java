@@ -15,11 +15,12 @@ import springGameTest.model.Item;
 import springGameTest.model.Inventory;
 import springGameTest.model.ItemType;
 import springGameTest.model.Property;
+import springGameTest.model.Recipe;
 import springGameTest.model.Skill;
 import springGameTest.model.User;
 import springGameTest.service.InventoryService;
 import springGameTest.service.PropertyService;
-import springGameTest.service.SkillService;
+import springGameTest.service.UserService;
 
 public class GameMock {
 
@@ -30,6 +31,7 @@ public class GameMock {
 	private static Inventory initializeGame() {
 		initializeItemTypeHierarchy();
 		initializeSkillTypeHierarchy();
+		initializeRecipes();
 		Inventory itemTemplate = initializeItemTemplate();
 		initializeUser(itemTemplate);
 		return initializeMarketItems(itemTemplate);
@@ -58,15 +60,8 @@ public class GameMock {
 		InventoryService.addItem(user.getInventory(),
 				itemTemplate.getItemByName(Constants.tinName), 10);
 
-		InventoryService.addItem(user.getRecipes(),
-				itemTemplate.getItemByName(Constants.daggerName), 1);
-		InventoryService.addItem(user.getRecipes(),
-				itemTemplate.getItemByName(Constants.swordName), 1);
-		
-		SkillService.grantSkillToUser(user,
-				Skill.getSkillByName(Constants.skillSwordCrafting));
-		SkillService.grantSkillToUser(user,
-				Skill.getSkillByName(Constants.skillDaggerCrafting));
+		UserService.addRecipe(user, Recipe.getRecipe(Constants.daggerName));
+		UserService.addRecipe(user, Recipe.getRecipe(Constants.swordName));
 	}
 
 	private static Inventory initializeItemTemplate() {
@@ -105,19 +100,6 @@ public class GameMock {
 		InventoryService.addItem(itemTemplate, sword);
 		
 		return itemTemplate;
-	}
-	
-	/////////////////////////////////////////////////////////////////////////////////
-	
-	private static void initializeSkillTypeHierarchy() {
-		Skill crafting =		new Skill(Constants.skillCrafting,		60.0, null);
-		Skill forging =			new Skill(Constants.skillForging,		40.0, crafting);
-		Skill tailoring =		new Skill(Constants.skillTailoring,		40.0, crafting);
-		Skill woodworking =		new Skill(Constants.skillWoodworking,	40.0, crafting);
-		Skill weaponForging =	new Skill(Constants.skillWeaponForging,	20.0, forging);
-		Skill armourForging =	new Skill(Constants.skillArmourForging,	20.0, forging);
-		Skill swordCrafting =	new Skill(Constants.skillSwordCrafting,	8.0, weaponForging);
-		Skill daggerCrafting =	new Skill(Constants.skillDaggerCrafting,8.0, weaponForging);
 	}
 	
 	public static void initializeItemTypeHierarchy () {
@@ -166,11 +148,9 @@ public class GameMock {
 
 		itemType = new ItemType(Constants.daggerName);
 		itemType.getParentTypes().add(Constants.meeleWeaponName);
-		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.resourcesNeeded, 3));
 
 		itemType = new ItemType(Constants.swordName);
 		itemType.getParentTypes().add(Constants.meeleWeaponName);
-		PropertyService.addProperty(itemType.getProperties(), new Property(Constants.resourcesNeeded, 12));
 
 		/////////////////////////
 		
@@ -250,7 +230,31 @@ public class GameMock {
 		currentAllTypes.put(currentTypeName, null);
 		currentType.setHierarchyLevel(maxParentLevel + 1);
 	}
-	///////////////////////////////////////////////////////////////////////////
 	
+	@SuppressWarnings("unused")
+	private static void initializeSkillTypeHierarchy() {
+		Skill crafting =		new Skill(Constants.skillCrafting,		60.0, null);
+		Skill forging =			new Skill(Constants.skillForging,		40.0, crafting);
+		Skill tailoring =		new Skill(Constants.skillTailoring,		40.0, crafting);
+		Skill woodworking =		new Skill(Constants.skillWoodworking,	40.0, crafting);
+		Skill weaponForging =	new Skill(Constants.skillWeaponForging,	20.0, forging);
+		Skill armourForging =	new Skill(Constants.skillArmourForging,	20.0, forging);
+		Skill swordCrafting =	new Skill(Constants.skillSwordCrafting,	8.0, weaponForging);
+		Skill daggerCrafting =	new Skill(Constants.skillDaggerCrafting,8.0, weaponForging);
+	}
+
+	private static void initializeRecipes() {
+		String name = Constants.daggerName;
+		Skill skill = Skill.getSkillByName(Constants.skillDaggerCrafting);
+		ItemType itemType = ItemType.getItemtypelist().get(name);
+		Recipe daggerRecipe = new Recipe(name, itemType, skill);
+		PropertyService.addProperty(daggerRecipe.getProperties(), new Property(Constants.resourcesNeeded, 3));
+
+		name = Constants.swordName;
+		skill = Skill.getSkillByName(Constants.skillSwordCrafting);
+		itemType = ItemType.getItemtypelist().get(name);
+		Recipe swordRecipe = new Recipe(name, itemType, skill);
+		PropertyService.addProperty(swordRecipe.getProperties(), new Property(Constants.resourcesNeeded, 12));
+	}
 	
 }

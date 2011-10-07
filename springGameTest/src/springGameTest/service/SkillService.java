@@ -1,7 +1,6 @@
 package springGameTest.service;
 
-import springGameTest.Constants;
-import springGameTest.model.Item;
+import springGameTest.model.Recipe;
 import springGameTest.model.Skill;
 import springGameTest.model.User;
 import springGameTest.model.UserSkill;
@@ -16,16 +15,11 @@ public class SkillService {
 		grantSkillToUser(user, newSkill.getParentSkill());
 	}
 
-	public static double getSkillRating(UserSkillGroup skillGroup, Item recipe) {
+	public static double getSkillRating(UserSkillGroup skillGroup, Recipe recipe) {
 		UserSkill skill;
 		double skillRating = 0;
 		long divisor = 1;
-		if (recipe.getName().equals(Constants.swordName)) {
-			skill = skillGroup.getUserSkillByName(Constants.skillSwordCrafting);
-		}
-		else {
-			skill = skillGroup.getUserSkillByName(Constants.skillDaggerCrafting);
-		}
+		skill = skillGroup.getUserSkillByName(recipe.getSkill().getName());
 		
 		while (skill != null) {
 			skillRating = skillRating + skill.getRating()/divisor;
@@ -35,15 +29,10 @@ public class SkillService {
 		return skillRating;
 	}
 
-	public static void increaseSkill(UserSkillGroup skillGroup, Item recipe,
+	public static void increaseSkill(UserSkillGroup skillGroup, Recipe recipe,
 			double increaseAmount) {
 		UserSkill skill;
-		if (recipe.getName().equals(Constants.swordName)) {
-			skill = skillGroup.getUserSkillByName(Constants.skillSwordCrafting);
-		}
-		else {
-			skill = skillGroup.getUserSkillByName(Constants.skillDaggerCrafting);
-		}
+		skill = skillGroup.getUserSkillByName(recipe.getSkill().getName());
 		
 		while (skill != null) {
 			increaseSkill(skill, increaseAmount);

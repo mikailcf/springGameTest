@@ -185,18 +185,6 @@ public class GameVOTest {
 	}
 
 	@Test
-	public final void test26() {
-		String testItemType = Constants.objectName;
-		Item testItem1 = new Item(testItemType);
-		Item testItem2 = new Item(testItemType);
-		testItem1.setName(testName1);
-		testItem2.setName(testName2);
-		testUser.getRecipes().addItem(testItem1, InventoryService.getItemName(testItem1));
-		testUser.getRecipes().addItem(testItem2, InventoryService.getItemName(testItem2));
-		assertTrue(testGameVO.getRecipeList().contains(testItem2));
-	}
-
-	@Test
 	public final void test27() {
 		String testItemType = Constants.objectName;
 		Item testItem1 = new Item(testItemType);

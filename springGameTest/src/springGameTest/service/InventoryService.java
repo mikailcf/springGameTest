@@ -6,6 +6,7 @@ import springGameTest.model.EntityProperties;
 import springGameTest.model.Inventory;
 import springGameTest.model.Item;
 import springGameTest.model.Property;
+import springGameTest.model.Recipe;
 import springGameTest.model.UserSkillGroup;
 import springGameTest.test.GameMock;
 
@@ -19,8 +20,8 @@ public class InventoryService {
 		return item.getName();
 	}
 
-	public static long getResourcesNeeded(Item item) {
-		return item.getIntValue(Constants.resourcesNeeded);
+	public static long getResourcesNeeded(Recipe recipe) {
+		return recipe.getIntValue(Constants.resourcesNeeded);
 	}
 	
 	public static long getBuyValue(Item item, double multiplier) {
@@ -94,8 +95,8 @@ public class InventoryService {
 	}
 
 	public static boolean processWorkbenchSelect(CraftVO craftVO,
-			Inventory inventory, Item item) {
-		long resourcesNeeded = getResourcesNeeded(item);
+			Inventory inventory, Recipe recipe) {
+		long resourcesNeeded = getResourcesNeeded(recipe);
 		Inventory availableResources = craftVO.getAvailableResources();
 		
 		for (Item resource: inventory.getItemList()) {
@@ -108,12 +109,12 @@ public class InventoryService {
 	}
 
 	public static boolean processCraftOrder(CraftVO craftVO,
-			Inventory inventory, Item recipe, Item resource, UserSkillGroup skills) {
+			Inventory inventory, Recipe recipe, Item resource, UserSkillGroup skills) {
 		long resourcesNeeded = getResourcesNeeded(recipe);
 
 		if (resource.isTypeOrSubType(Constants.resourceName) &&
 				resourcesNeeded <= getItemQuantity(resource)) {
-			Item craftedItem = recipe.copyNewId();
+			Item craftedItem = new Item(recipe.getItemType());
 			EntityProperties properties = craftedItem.getProperties();
 			craftedItem.setName(resource.getName() + " " + recipe.getName());
 

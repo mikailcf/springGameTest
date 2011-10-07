@@ -58,14 +58,6 @@ public class CraftVOTest {
 	}
 
 	@Test
-	public final void test06() {
-		String testItemType = Constants.objectName;
-		Item testItem = new Item(testItemType);
-		testCraftVO.setSelectedRecipe(testItem);
-		assertTrue(testCraftVO.getSelectedRecipe().equals(testItem));
-	}
-
-	@Test
 	public final void test07() {
 		String testItemType = Constants.objectName;
 		Item testItem = new Item(testItemType);

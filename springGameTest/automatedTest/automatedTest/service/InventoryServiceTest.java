@@ -55,20 +55,6 @@ public class InventoryServiceTest {
 		assertTrue(InventoryService.getItemName(testItem) == testName);
 	}
 
-	@Test (expected = NullPointerException.class)
-	public final void test05() {
-		InventoryService.getResourcesNeeded(testItem);
-	}
-
-	@Test
-	public final void test06() {
-		long testResourcesNeeded = 12;
-		PropertyService.addProperty(testItem.getProperties(),
-				new Property(Constants.resourcesNeeded, testResourcesNeeded));
-		assertTrue(InventoryService.getResourcesNeeded(testItem)
-				== testResourcesNeeded);
-	}
-
 	@Test
 	public final void test07() {
 		double multiplier = 1.0;
