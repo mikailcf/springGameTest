@@ -1,10 +1,8 @@
 package springGameTest.service;
 
-import springGameTest.Constants;
 import springGameTest.domain.CraftVO;
 import springGameTest.model.Inventory;
 import springGameTest.model.Item;
-import springGameTest.model.Property;
 import springGameTest.model.Recipe;
 import springGameTest.model.User;
 
@@ -49,10 +47,8 @@ public class UserService {
 		}
 
 		long orderValue = buyingQuantity * getBuyValue(user, item);
-		if (orderValue <= user.getIntValue(Constants.userMoney)) {
-			PropertyService.addProperty(user.getProperties(),
-					new Property(Constants.userMoney, -orderValue),
-					PropertyCollisionAction.Sum);
+		if (orderValue <= user.getMoney()) {
+			user.setMoney(user.getMoney() - orderValue);
 			InventoryService.addItem(user.getInventory(), item, buyingQuantity);
 			EventService.addEventToUser(user, "" + buyingQuantity + "x " +
 					InventoryService.getItemName(item) + " bought for $" + orderValue);
@@ -100,9 +96,7 @@ public class UserService {
 
 		long orderValue = sellingQuantity * getSellValue(user, item);
 		if (sellingQuantity <= InventoryService.getItemQuantity(item)) {
-			PropertyService.addProperty(user.getProperties(),
-					new Property(Constants.userMoney, orderValue),
-					PropertyCollisionAction.Sum);
+			user.setMoney(user.getMoney() + orderValue);
 			InventoryService.addQuantityToItem(user.getInventory(), item, -sellingQuantity);
 			EventService.addEventToUser(user, "" + sellingQuantity + "x " +
 					InventoryService.getItemName(item) + " sold for $" + orderValue);
@@ -166,13 +160,11 @@ public class UserService {
 		}
 		
 		long energyNeeded = InventoryService.getResourcesNeeded(recipe);
-		if (user.getIntValue(Constants.currentEnergy) < energyNeeded) {
+		if (user.getEnergy() < energyNeeded) {
 			EventService.addEventToUser(user, "Not enough energy");
 			return false;
 		}
-		PropertyService.addProperty(user.getProperties(),
-				new Property(Constants.currentEnergy, -energyNeeded),
-				PropertyCollisionAction.Sum);
+		user.setEnergy(user.getEnergy() - energyNeeded);
 		
 		if(InventoryService.processCraftOrder(craftVO, user.getInventory(),
 				recipe, resource, user.getSkills())) {

@@ -101,8 +101,8 @@ public class Item {
 	}
 
 	public long getIntValue(String propertyName) {
-		PropertyValue propertyValue = properties.
-				getPropertyValueByName(propertyName);
+		Property propertyValue = properties.
+				getPropertyByName(propertyName);
 		if (propertyValue == null) {
 			return itemType.getIntValue(propertyName);
 		}
@@ -110,8 +110,8 @@ public class Item {
 	}
 	
 	public double getFloatValue(String propertyName) {
-		PropertyValue propertyValue = properties.
-				getPropertyValueByName(propertyName);
+		Property propertyValue = properties.
+				getPropertyByName(propertyName);
 		if (propertyValue == null) {
 			return itemType.getFloatValue(propertyName);
 		}
@@ -119,8 +119,8 @@ public class Item {
 	}
 	
 	public String getStringValue(String propertyName) {
-		PropertyValue propertyValue = properties.
-				getPropertyValueByName(propertyName);
+		Property propertyValue = properties.
+				getPropertyByName(propertyName);
 		if (propertyValue == null) {
 			return itemType.getStringValue(propertyName);
 		}
@@ -128,8 +128,8 @@ public class Item {
 	}
 	
 	public Date getDateValue(String propertyName) {
-		PropertyValue propertyValue = properties.
-				getPropertyValueByName(propertyName);
+		Property propertyValue = properties.
+				getPropertyByName(propertyName);
 		if (propertyValue == null) {
 			return itemType.getDateValue(propertyName);
 		}

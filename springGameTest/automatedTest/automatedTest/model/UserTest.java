@@ -8,25 +8,21 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import springGameTest.Constants;
 import springGameTest.model.EntityProperties;
 import springGameTest.model.Event;
-import springGameTest.model.Inventory;
-import springGameTest.model.Item;
 import springGameTest.model.Property;
 import springGameTest.model.User;
 import springGameTest.model.WrongTypeException;
 import springGameTest.service.EventService;
-import springGameTest.service.InventoryService;
 import springGameTest.service.PropertyService;
 
 public class UserTest {
 	
 	private long testUserId = 12;
 	private EntityProperties testProperties = new EntityProperties();
-	private Inventory testInventory = new Inventory();
-	private Inventory testRecipes = new Inventory();
-	private User testUser = new User(testUserId);
+//	private Inventory testInventory = new Inventory();
+//	private Inventory testRecipes = new Inventory();
+	private User testUser = new User(testUserId, "testName");
 
 	private String testName1 = "testName1";
 	private String testName2 = "testName2";

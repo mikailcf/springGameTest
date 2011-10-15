@@ -7,23 +7,24 @@ import java.util.Set;
 
 public class EntityProperties {
 
-	private final Map<String, PropertyValue> propertyList;
+	private final Map<String, Property> propertyList;
 	
 	public EntityProperties() {
-		propertyList = new HashMap<String, PropertyValue>();
+		propertyList = new HashMap<String, Property>();
 	}
 
-	public PropertyValue getPropertyValueByName (String propertyName) {
+	public Property getPropertyByName (String propertyName) {
 		return propertyList.get(propertyName);
 	}
 
-	public PropertyValue getPropertyValueByNameWithDefault (String propertyName) {
-		PropertyValue propertyValue = propertyList.get(propertyName);
-		return propertyValue == null ? new PropertyValue(PropertyType.Integer) : propertyValue;
+	public Property getPropertyByNameWithDefault (String propertyName) {
+		Property propertyValue = propertyList.get(propertyName);
+		return propertyValue == null ? 
+				new Property(propertyName, PropertyType.Integer) : propertyValue;
 	}
 
-	public void addProperty(String propertyName, PropertyValue propertyValue) {
-		propertyList.put(propertyName, propertyValue);
+	public void addProperty(Property newProperty) {
+		propertyList.put(newProperty.getPropertyName(), newProperty);
 	}
 	
 	public void clear() {
@@ -36,7 +37,7 @@ public class EntityProperties {
 	
 	public void copy(EntityProperties newProperties) {
 		for (String propertyName: propertyList.keySet()) {
-			newProperties.addProperty(propertyName, propertyList.get(propertyName).copy());
+			newProperties.addProperty(propertyList.get(propertyName).copy());
 		}
 	}
 
@@ -65,7 +66,7 @@ public class EntityProperties {
 		return propertyList.size();
 	}
 
-	public Collection<PropertyValue> values() {
+	public Collection<Property> values() {
 		return propertyList.values();
 	}
 	

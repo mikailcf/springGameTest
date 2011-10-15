@@ -15,7 +15,7 @@ import springGameTest.service.PropertyService;
 
 public class CraftVOTest {
 	
-	private CraftVO testCraftVO = new CraftVO(new User(233));
+	private CraftVO testCraftVO = new CraftVO(new User(233, "testName"));
 
 	@Before
 	public void setUp() {

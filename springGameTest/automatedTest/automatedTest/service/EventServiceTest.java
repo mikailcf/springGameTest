@@ -14,8 +14,8 @@ import springGameTest.service.EventService;
 
 public class EventServiceTest {
 
-	private User testUser = new User(22);
-	private User testUser2 = new User(23);
+	private User testUser = new User(22, "testName1");
+	private User testUser2 = new User(23, "testName2");
 	private String testMessage1 = "testMessage1";
 	private String testMessage2 = "testMessage2";
 	private String testMessage3 = "testMessage3";

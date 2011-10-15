@@ -21,7 +21,7 @@ public class GameVOTest {
 
 	
 	private long testUserId = 12;
-	private User testUser = new User(testUserId);
+	private User testUser = new User(testUserId, "testName");
 
 	private String testName1 = "testName1";
 	private String testName2 = "testName2";

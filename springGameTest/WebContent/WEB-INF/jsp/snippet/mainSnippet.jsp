@@ -9,9 +9,9 @@
 				<tr>
 					<td>
 						<spring:message code="game.player.information" /><br>
-						Name:   ${info.getStringValue("name")}<br>
-						Money:  $${info.getIntValue("user.money")}<br>
-						Energy: ${info.getIntValue("current.energy")}/${info.getIntValue("maximum.energy")}
+						Name:   ${info.user.name}<br>
+						Money:  $${info.user.money}<br>
+						Energy: ${info.user.energy}/${info.user.maxEnergy}
 					</td>
 				</tr>
 				<tr>

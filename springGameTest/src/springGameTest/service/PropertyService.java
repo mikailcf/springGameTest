@@ -3,13 +3,12 @@ package springGameTest.service;
 import springGameTest.model.EntityProperties;
 import springGameTest.model.Property;
 import springGameTest.model.PropertyType;
-import springGameTest.model.PropertyValue;
 import springGameTest.model.WrongTypeException;
 
 public class PropertyService {
 	
-	public static void sumProperty(PropertyValue currentProperty,
-			PropertyValue otherProperty) {
+	public static void sumProperty(Property currentProperty,
+			Property otherProperty) {
 		if (currentProperty.getValueType() != otherProperty.getValueType()) {
 			throw new WrongTypeException();
 		}
@@ -29,51 +28,38 @@ public class PropertyService {
 		}
 	}
 
-	public static void addProperty (EntityProperties properties, String propertyName,
-			PropertyValue propertyValue, PropertyCollisionAction action) {
-		PropertyValue currentProperty = properties.getPropertyValueByName(propertyName);
+	public static void addProperty (EntityProperties properties,
+			Property newProperty, PropertyCollisionAction action) {
+		Property currentProperty = properties.getPropertyByName(
+				newProperty.getPropertyName());
 		if (currentProperty == null) { action = PropertyCollisionAction.NewPrevails; }
 		switch (action) {
 		case ExistingPrevails:
 			break;
 		case Sum:
-			sumProperty(currentProperty, propertyValue);
+			sumProperty(currentProperty, newProperty);
 			break;
 		case NewPrevails:
 		default:
-			properties.addProperty(propertyName, propertyValue);
+			properties.addProperty(newProperty);
 			break;
 		}
 	}
 
-	public static void addProperty (EntityProperties properties,
-			String propertyName, PropertyValue propertyValue) {
-		addProperty(properties, propertyName, propertyValue,
-				PropertyCollisionAction.ExistingPrevails);
-	}
-
 	public static void addProperty (EntityProperties properties, String propertyName,
 			PropertyType propertyType, PropertyCollisionAction action) {
-		addProperty(properties, propertyName,
-				new PropertyValue(propertyType), action);
-	}
-
-	public static void addProperty (EntityProperties properties,
-			Property newProperty, PropertyCollisionAction action) {
-		addProperty(properties, newProperty.getPropertyName(),
-				newProperty.getPropertyValue(), action);
-	}
-
-	public static void addProperty (EntityProperties properties,
-			String propertyName, PropertyType propertyType) {
-		addProperty(properties, propertyName,
-				new PropertyValue(propertyType));
+		addProperty(properties, new Property(propertyName, propertyType), action);
 	}
 
 	public static void addProperty (EntityProperties properties,
 			Property newProperty) {
-		addProperty(properties, newProperty.getPropertyName(),
-				newProperty.getPropertyValue());
+		addProperty(properties, newProperty,
+				PropertyCollisionAction.ExistingPrevails);
+	}
+
+	public static void addProperty (EntityProperties properties,
+			String propertyName, PropertyType propertyType) {
+		addProperty(properties, new Property(propertyName, propertyType));
 	}
 
 }

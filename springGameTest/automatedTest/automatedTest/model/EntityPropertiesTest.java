@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import springGameTest.model.EntityProperties;
 import springGameTest.model.PropertyType;
-import springGameTest.model.PropertyValue;
+import springGameTest.model.Property;
 import springGameTest.service.PropertyService;
 
 public class EntityPropertiesTest {
@@ -25,17 +25,17 @@ public class EntityPropertiesTest {
 	private double testValue2 = 37.5;
 	private String testValue3 = "testValue3";
 	private Date testValue4 = new Date();
-	private PropertyValue testProperty1 = new PropertyValue(testValue1);
-	private PropertyValue testProperty2 = new PropertyValue(testValue2);
-	private PropertyValue testProperty3 = new PropertyValue(testValue3);
-	private PropertyValue testProperty4 = new PropertyValue(testValue4);
+	private Property testProperty1 = new Property(testName1, testValue1);
+	private Property testProperty2 = new Property(testName2, testValue2);
+	private Property testProperty3 = new Property(testName3, testValue3);
+	private Property testProperty4 = new Property(testName4, testValue4);
 	
 	@Before
 	public void setUp() {
-		PropertyService.addProperty(testEntityProperties, testName1, testProperty1);
-		PropertyService.addProperty(testEntityProperties, testName2, testProperty2);
-		PropertyService.addProperty(testEntityProperties, testName3, testProperty3);
-		PropertyService.addProperty(testEntityProperties, testName4, testProperty4);
+		PropertyService.addProperty(testEntityProperties, testProperty1);
+		PropertyService.addProperty(testEntityProperties, testProperty2);
+		PropertyService.addProperty(testEntityProperties, testProperty3);
+		PropertyService.addProperty(testEntityProperties, testProperty4);
 	}
 	
 	@After
@@ -45,70 +45,70 @@ public class EntityPropertiesTest {
 
 	@Test
 	public final void test01() {
-	    assertTrue(testEntityProperties.getPropertyValueByName(testName1).
+	    assertTrue(testEntityProperties.getPropertyByName(testName1).
 	    		equals(testProperty1));
 	}
 
 	@Test
 	public final void test02() {
-	    assertTrue(testEntityProperties.getPropertyValueByName(testName2).
+	    assertTrue(testEntityProperties.getPropertyByName(testName2).
 	    		equals(testProperty2));
 	}
 
 	@Test
 	public final void test03() {
-	    assertTrue(testEntityProperties.getPropertyValueByName(testName3).
+	    assertTrue(testEntityProperties.getPropertyByName(testName3).
 	    		equals(testProperty3));
 	}
 
 	@Test
 	public final void test04() {
-	    assertTrue(testEntityProperties.getPropertyValueByName(testName4).
+	    assertTrue(testEntityProperties.getPropertyByName(testName4).
 	    		equals(testProperty4));
 	}
 
 	@Test
 	public final void test05() {
-		assertTrue(testEntityProperties.getPropertyValueByName(testName5) == null);
+		assertTrue(testEntityProperties.getPropertyByName(testName5) == null);
 	}
 
 	@Test
 	public final void test06() {
-	    assertTrue(testEntityProperties.getPropertyValueByNameWithDefault(testName1).
+	    assertTrue(testEntityProperties.getPropertyByNameWithDefault(testName1).
 	    		equals(testProperty1));
 	}
 
 	@Test
 	public final void test07() {
-	    assertTrue(testEntityProperties.getPropertyValueByNameWithDefault(testName2).
+	    assertTrue(testEntityProperties.getPropertyByNameWithDefault(testName2).
 	    		equals(testProperty2));
 	}
 
 	@Test
 	public final void test08() {
-	    assertTrue(testEntityProperties.getPropertyValueByNameWithDefault(testName3).
+	    assertTrue(testEntityProperties.getPropertyByNameWithDefault(testName3).
 	    		equals(testProperty3));
 	}
 
 	@Test
 	public final void test09() {
-	    assertTrue(testEntityProperties.getPropertyValueByNameWithDefault(testName4).
+	    assertTrue(testEntityProperties.getPropertyByNameWithDefault(testName4).
 	    		equals(testProperty4));
 	}
 
 	@Test
 	public final void test10() {
-		assertTrue(testEntityProperties.getPropertyValueByNameWithDefault(testName5).
-	    		equals(new PropertyValue(PropertyType.Integer)));
+		assertTrue(testEntityProperties.getPropertyByNameWithDefault(testName5).
+	    		equals(new Property(testName5, PropertyType.Integer)));
 	}
 
 	@Test
 	public final void test11() {
 		EntityProperties otherEntityProperties = new EntityProperties();
-		PropertyService.addProperty(otherEntityProperties, testName1, testProperty1);
-		PropertyService.addProperty(otherEntityProperties, testName2, testProperty2);
-		PropertyService.addProperty(otherEntityProperties, testName3, testProperty3);
-		PropertyService.addProperty(otherEntityProperties, testName4, testProperty4);
+		PropertyService.addProperty(otherEntityProperties, testProperty1);
+		PropertyService.addProperty(otherEntityProperties, testProperty2);
+		PropertyService.addProperty(otherEntityProperties, testProperty3);
+		PropertyService.addProperty(otherEntityProperties, testProperty4);
 
 		assertTrue(testEntityProperties.equals(otherEntityProperties));
 	}
@@ -116,10 +116,10 @@ public class EntityPropertiesTest {
 	@Test
 	public final void test12() {
 		EntityProperties otherEntityProperties = new EntityProperties();
-		PropertyService.addProperty(otherEntityProperties, testName2, testProperty2);
-		PropertyService.addProperty(otherEntityProperties, testName4, testProperty4);
-		PropertyService.addProperty(otherEntityProperties, testName1, testProperty1);
-		PropertyService.addProperty(otherEntityProperties, testName3, testProperty3);
+		PropertyService.addProperty(otherEntityProperties, testProperty2);
+		PropertyService.addProperty(otherEntityProperties, testProperty4);
+		PropertyService.addProperty(otherEntityProperties, testProperty1);
+		PropertyService.addProperty(otherEntityProperties, testProperty3);
 
 		assertTrue(testEntityProperties.equals(otherEntityProperties));
 	}
@@ -127,10 +127,10 @@ public class EntityPropertiesTest {
 	@Test
 	public final void test13() {
 		EntityProperties otherEntityProperties = new EntityProperties();
-		PropertyService.addProperty(otherEntityProperties, testName2, testProperty1);
-		PropertyService.addProperty(otherEntityProperties, testName4, testProperty2);
-		PropertyService.addProperty(otherEntityProperties, testName1, testProperty3);
-		PropertyService.addProperty(otherEntityProperties, testName3, testProperty4);
+		PropertyService.addProperty(otherEntityProperties, testProperty1);
+		PropertyService.addProperty(otherEntityProperties, testProperty2);
+		PropertyService.addProperty(otherEntityProperties, testProperty3);
+		PropertyService.addProperty(otherEntityProperties, testProperty4);
 
 		assertFalse(testEntityProperties.equals(otherEntityProperties));
 	}
@@ -139,7 +139,7 @@ public class EntityPropertiesTest {
 	public final void test14() {
 		EntityProperties otherEntityProperties = new EntityProperties();
 		testEntityProperties.copy(otherEntityProperties);
-	    assertTrue(otherEntityProperties.getPropertyValueByName(testName1).
+	    assertTrue(otherEntityProperties.getPropertyByName(testName1).
 	    		equals(testProperty1));
 	}
 
@@ -147,7 +147,7 @@ public class EntityPropertiesTest {
 	public final void test15() {
 		EntityProperties otherEntityProperties = new EntityProperties();
 		testEntityProperties.copy(otherEntityProperties);
-	    assertTrue(otherEntityProperties.getPropertyValueByName(testName2).
+	    assertTrue(otherEntityProperties.getPropertyByName(testName2).
 	    		equals(testProperty2));
 	}
 
@@ -155,7 +155,7 @@ public class EntityPropertiesTest {
 	public final void test16() {
 		EntityProperties otherEntityProperties = new EntityProperties();
 		testEntityProperties.copy(otherEntityProperties);
-	    assertTrue(otherEntityProperties.getPropertyValueByName(testName3).
+	    assertTrue(otherEntityProperties.getPropertyByName(testName3).
 	    		equals(testProperty3));
 	}
 
@@ -163,7 +163,7 @@ public class EntityPropertiesTest {
 	public final void test17() {
 		EntityProperties otherEntityProperties = new EntityProperties();
 		testEntityProperties.copy(otherEntityProperties);
-	    assertTrue(otherEntityProperties.getPropertyValueByName(testName4).
+	    assertTrue(otherEntityProperties.getPropertyByName(testName4).
 	    		equals(testProperty4));
 	}
 

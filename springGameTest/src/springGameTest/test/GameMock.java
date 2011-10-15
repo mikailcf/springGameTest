@@ -24,7 +24,7 @@ import springGameTest.service.UserService;
 
 public class GameMock {
 
-	public static User user = new User(1);
+	public static User user;
 	public static final Inventory marketItems = initializeGame();//MarketItems();
 	public static final Random rand = new Random();
 	
@@ -52,10 +52,10 @@ public class GameMock {
 
 	private static void initializeUser(Inventory itemTemplate) {
 		//Initializing the user for testing purposes
-		PropertyService.addProperty(user.getProperties(), new Property(Constants.name, "Smith"));
-		PropertyService.addProperty(user.getProperties(), new Property(Constants.userMoney, 1000000));
-		PropertyService.addProperty(user.getProperties(), new Property(Constants.currentEnergy, 10000));
-		PropertyService.addProperty(user.getProperties(), new Property(Constants.maximumEnergy, 10000));
+		user = new User(1, "Smith");
+		user.setEnergy(100);
+		user.setMaxEnergy(100);
+		user.setMoney(1000000);
 
 		InventoryService.addItem(user.getInventory(),
 				itemTemplate.getItemByName(Constants.tinName), 10);
@@ -210,8 +210,8 @@ public class GameMock {
 			maxParentLevel = Math.max(maxParentLevel, parentType.getHierarchyLevel());
 			for (String parentPropertyName: parentAllProperties.keySet()) {
 				currentAllProperties.remove(parentPropertyName);
-				currentAllProperties.addProperty(parentPropertyName, 
-						parentAllProperties.getPropertyValueByName(parentPropertyName));
+				currentAllProperties.addProperty(
+						parentAllProperties.getPropertyByName(parentPropertyName));
 			}
 			
 			for (String typeName: parentAllTypes.keySet()) {
@@ -223,8 +223,8 @@ public class GameMock {
 		EntityProperties properties = currentType.getProperties();
 		for (String parentPropertyName: properties.keySet()) {
 			currentAllProperties.remove(parentPropertyName);
-			currentAllProperties.addProperty(parentPropertyName, 
-					properties.getPropertyValueByName(parentPropertyName));
+			currentAllProperties.addProperty(
+					properties.getPropertyByName(parentPropertyName));
 		}
 
 		currentAllTypes.put(currentTypeName, null);

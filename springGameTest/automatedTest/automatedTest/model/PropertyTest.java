@@ -37,7 +37,7 @@ public class PropertyTest {
 		String name = "testName";
 		PropertyType type = PropertyType.Integer;
 		testProperty = new Property(name, type);
-		assertTrue(type == testProperty.getPropertyValue().getValueType());
+		assertTrue(type == testProperty.getValueType());
 	}
 
 	@Test
@@ -53,7 +53,7 @@ public class PropertyTest {
 		String name = "testName";
 		long value = 27;
 		testProperty = new Property(name, value);
-	    assertTrue(value == testProperty.getPropertyValue().getIntValue());
+	    assertTrue(value == testProperty.getIntValue());
 	}
 
 	@Test
@@ -69,7 +69,7 @@ public class PropertyTest {
 		String name = "testName";
 		double value = 27.0;
 		testProperty = new Property(name, value);
-	    assertTrue(value == testProperty.getPropertyValue().getFloatValue());
+	    assertTrue(value == testProperty.getFloatValue());
 	}
 
 	@Test
@@ -85,7 +85,7 @@ public class PropertyTest {
 		String name = "testName";
 		String value = "testValue";
 		testProperty = new Property(name, value);
-	    assertTrue(value.equals(testProperty.getPropertyValue().getStringValue()));
+	    assertTrue(value.equals(testProperty.getStringValue()));
 	}
 
 	@Test
@@ -101,7 +101,7 @@ public class PropertyTest {
 		String name = "testName";
 		Date value = new Date();
 		testProperty = new Property(name, value);
-	    assertTrue(value.equals(testProperty.getPropertyValue().getDateValue()));
+	    assertTrue(value.equals(testProperty.getDateValue()));
 	}
 
 	@Test

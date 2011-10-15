@@ -48,22 +48,22 @@ public class Recipe {
 	
 	public long getIntValue(String propertyName) {
 		return properties.
-				getPropertyValueByName(propertyName).getIntValue();
+				getPropertyByName(propertyName).getIntValue();
 	}
 	
 	public double getFloatValue(String propertyName) {
 		return properties.
-				getPropertyValueByName(propertyName).getFloatValue();
+				getPropertyByName(propertyName).getFloatValue();
 	}
 	
 	public String getStringValue(String propertyName) {
 		return properties.
-				getPropertyValueByName(propertyName).getStringValue();
+				getPropertyByName(propertyName).getStringValue();
 	}
 	
 	public Date getDateValue(String propertyName) {
 		return properties.
-				getPropertyValueByName(propertyName).getDateValue();
+				getPropertyByName(propertyName).getDateValue();
 	}
 
 }

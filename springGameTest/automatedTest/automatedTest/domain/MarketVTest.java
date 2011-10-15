@@ -11,7 +11,7 @@ import springGameTest.model.User;
 
 public class MarketVTest {
 	
-	private MarketVO testMarketVO = new MarketVO(new User(55));
+	private MarketVO testMarketVO = new MarketVO(new User(55, "testName"));
 
 	@Before
 	public void setUp() {

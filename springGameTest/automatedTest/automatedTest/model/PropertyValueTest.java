@@ -8,40 +8,41 @@ import org.junit.Before;
 import org.junit.Test;
 
 import springGameTest.model.PropertyType;
-import springGameTest.model.PropertyValue;
+import springGameTest.model.Property;
 import springGameTest.model.WrongTypeException;
 
 public class PropertyValueTest {
 
-	private PropertyValue nullInteger = new PropertyValue(PropertyType.Integer);
-	private PropertyValue nullFloat = new PropertyValue(PropertyType.Float);
-	private PropertyValue nullString = new PropertyValue(PropertyType.String);
-	private PropertyValue nullDate = new PropertyValue(PropertyType.Date);
+	private String testName = "testName";
+	private Property nullInteger = new Property(testName, PropertyType.Integer);
+	private Property nullFloat = new Property(testName, PropertyType.Float);
+	private Property nullString = new Property(testName, PropertyType.String);
+	private Property nullDate = new Property(testName, PropertyType.Date);
 
-	private PropertyValue integer0 = new PropertyValue(0);
-	private PropertyValue integer1 = new PropertyValue(1);
-	private PropertyValue integerMinus1 = new PropertyValue(-1);
-	private PropertyValue integer2 = new PropertyValue(2);
-	private PropertyValue integer1Other = new PropertyValue(PropertyType.Integer);
-	private PropertyValue integer2Other = new PropertyValue(PropertyType.Integer);
+	private Property integer0 = new Property(testName, 0);
+	private Property integer1 = new Property(testName, 1);
+	private Property integerMinus1 = new Property(testName, -1);
+	private Property integer2 = new Property(testName, 2);
+	private Property integer1Other = new Property(testName, PropertyType.Integer);
+	private Property integer2Other = new Property(testName, PropertyType.Integer);
 
-	private PropertyValue float0 = new PropertyValue(0.0);
-	private PropertyValue float1 = new PropertyValue(1.0);
-	private PropertyValue floatMinus1 = new PropertyValue(-1.0);
-	private PropertyValue float2 = new PropertyValue(2.0);
-	private PropertyValue floatHalf = new PropertyValue(0.5);
-	private PropertyValue float2Other = new PropertyValue(PropertyType.Float);
-	private PropertyValue floatHalfOther = new PropertyValue(PropertyType.Float);
+	private Property float0 = new Property(testName, 0.0);
+	private Property float1 = new Property(testName, 1.0);
+	private Property floatMinus1 = new Property(testName, -1.0);
+	private Property float2 = new Property(testName, 2.0);
+	private Property floatHalf = new Property(testName, 0.5);
+	private Property float2Other = new Property(testName, PropertyType.Float);
+	private Property floatHalfOther = new Property(testName, PropertyType.Float);
 
-	private PropertyValue stringEmpty = new PropertyValue("");
-	private PropertyValue stringA = new PropertyValue("a");
-	private PropertyValue stringAz = new PropertyValue("az");
-	private PropertyValue stringAOther = new PropertyValue(PropertyType.String);
-	private PropertyValue stringAzOther = new PropertyValue(PropertyType.String);
+	private Property stringEmpty = new Property(testName, "");
+	private Property stringA = new Property(testName, "a");
+	private Property stringAz = new Property(testName, "az");
+	private Property stringAOther = new Property(testName, PropertyType.String);
+	private Property stringAzOther = new Property(testName, PropertyType.String);
 
 	Date now = new Date();
-	private PropertyValue dateNow = new PropertyValue(now);
-	private PropertyValue dateNowOther = new PropertyValue(PropertyType.Date);
+	private Property dateNow = new Property(testName, now);
+	private Property dateNowOther = new Property(testName, PropertyType.Date);
 	
 	@Before
 	public void setUp() {

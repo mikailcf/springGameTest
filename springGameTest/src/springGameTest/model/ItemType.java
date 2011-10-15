@@ -62,19 +62,19 @@ public class ItemType implements Comparable<ItemType> {
 	}
 	
 	public long getIntValue(String propertyName) {
-		return allProperties.getPropertyValueByName(propertyName).getIntValue();
+		return allProperties.getPropertyByName(propertyName).getIntValue();
 	}
 	
 	public double getFloatValue(String propertyName) {
-		return allProperties.getPropertyValueByName(propertyName).getFloatValue();
+		return allProperties.getPropertyByName(propertyName).getFloatValue();
 	}
 	
 	public String getStringValue(String propertyName) {
-		return allProperties.getPropertyValueByName(propertyName).getStringValue();
+		return allProperties.getPropertyByName(propertyName).getStringValue();
 	}
 	
 	public Date getDateValue(String propertyName) {
-		return allProperties.getPropertyValueByName(propertyName).getDateValue();
+		return allProperties.getPropertyByName(propertyName).getDateValue();
 	}
 	
 	public boolean hasProperty(String propertyName) {

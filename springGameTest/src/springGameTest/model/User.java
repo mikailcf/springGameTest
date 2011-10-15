@@ -8,14 +8,19 @@ import java.util.List;
 public class User {
 
 	private final long userId;
+	private final String name;
+	private long energy;
+	private long maxEnergy;
+	private long money;
 	private final EntityProperties properties;
 	private final Inventory inventory;
 	private final UserSkillGroup skills;
 	private final RecipeGroup recipes;
 	private final List<Event> eventList;
 
-	public User(long userId) {
+	public User(long userId, String name) {
 		this.userId = userId;
+		this.name = name;
 
 		properties = new EntityProperties();
 		inventory = new Inventory();
@@ -26,6 +31,34 @@ public class User {
 
 	public long getUserId() {
 		return userId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public long getEnergy() {
+		return energy;
+	}
+
+	public void setEnergy(long energy) {
+		this.energy = energy;
+	}
+
+	public long getMaxEnergy() {
+		return maxEnergy;
+	}
+
+	public void setMaxEnergy(long maxEnergy) {
+		this.maxEnergy = maxEnergy;
+	}
+
+	public long getMoney() {
+		return money;
+	}
+
+	public void setMoney(long money) {
+		this.money = money;
 	}
 
 	public EntityProperties getProperties() {
@@ -50,22 +83,22 @@ public class User {
 	
 	public long getIntValue(String propertyName) {
 		return properties.
-				getPropertyValueByName(propertyName).getIntValue();
+				getPropertyByName(propertyName).getIntValue();
 	}
 	
 	public double getFloatValue(String propertyName) {
 		return properties.
-				getPropertyValueByName(propertyName).getFloatValue();
+				getPropertyByName(propertyName).getFloatValue();
 	}
 	
 	public String getStringValue(String propertyName) {
 		return properties.
-				getPropertyValueByName(propertyName).getStringValue();
+				getPropertyByName(propertyName).getStringValue();
 	}
 	
 	public Date getDateValue(String propertyName) {
 		return properties.
-				getPropertyValueByName(propertyName).getDateValue();
+				getPropertyByName(propertyName).getDateValue();
 	}
 	
 	public boolean hasProperty(String propertyName) {

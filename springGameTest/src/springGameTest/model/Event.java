@@ -3,7 +3,8 @@ package springGameTest.model;
 import java.util.Date;
 
 public class Event {
-	
+
+	private long itemId;
 	private final Date date;
 	private final String message;
 	private boolean isNew;
@@ -33,6 +34,14 @@ public class Event {
 	public String getMessage() {
 		isNew = false;
 		return message;
+	}
+
+	public long getItemId() {
+		return itemId;
+	}
+
+	public void setItemId(long itemId) {
+		this.itemId = itemId;
 	}
 
 }

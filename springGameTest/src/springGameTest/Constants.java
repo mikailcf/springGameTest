@@ -2,10 +2,6 @@ package springGameTest;
 
 public class Constants {
 
-	public static final String currentEnergy = "current.energy";
-	public static final String maximumEnergy = "maximum.energy";
-	public static final String userMoney = "user.money";
-	public static final String name = "name";
 	public static final String craftMultiplier = "craft.multiplier";
 	public static final String resourcesNeeded = "resources.needed";
 	public static final String damage = "damage";
