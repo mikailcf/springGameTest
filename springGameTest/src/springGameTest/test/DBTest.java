@@ -7,9 +7,7 @@ import java.sql.Statement;
 
 public class DBTest {
 
-	/**
-	 * @param args
-	 */
+	
 	public static void main(String[] args) {
         Connection conn = null;
 

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import springGameTest.domain.CraftVO;
 import springGameTest.service.UserService;
@@ -23,7 +24,7 @@ public class CraftController {
 
 	@RequestMapping("/workbenchSelect.html")
 	@ModelAttribute("info")
-	public String processWorkbenchSelect(
+	public ModelAndView processWorkbenchSelect(
 			@RequestParam(value="recipeId", required=true) String recipeId) {
 		CraftVO craftVO = ViewService.getCraftVOByUserId(1);
 		if (UserService.processWorkbenchSelect(craftVO, recipeId)) {
@@ -31,12 +32,16 @@ public class CraftController {
 			ViewService.setCraftResult(craftVO);
 		}
 		else ViewService.removeCraftResult(craftVO);
-		return "redirect:workbench.html";
+		
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("workbench");
+        mav.addObject("info", craftVO);
+        return mav;
 	}
 
 	@RequestMapping("/workbenchCraft.html")
 	@ModelAttribute("info")
-	public String processCraftOrder(
+	public ModelAndView processCraftOrder(
 			@RequestParam(value="recipeId", required=true) String recipeId,
 			@RequestParam(value="resourceId", required=true) String resourceId) {
 		CraftVO craftVO = ViewService.getCraftVOByUserId(1);
@@ -46,7 +51,11 @@ public class CraftController {
 			ViewService.setCraftResult(craftVO);
 		}
 		else ViewService.removeCraftResult(craftVO);
-		return "redirect:workbench.html";
+		
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("workbench");
+        mav.addObject("info", craftVO);
+        return mav;
 	}
 
 }

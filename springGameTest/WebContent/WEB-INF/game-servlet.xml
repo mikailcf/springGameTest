@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-      http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-      http://www.springframework.org/schema/context
-      http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	xmlns:beans="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 
-	<!-- Auto-detect controllers in this package -->
-	<context:component-scan base-package="springGameTest.web" />
+    <bean class="springGameTest.web.HomeController" />
+    <bean class="springGameTest.web.CraftController" />
+    <bean class="springGameTest.web.MarketController" />
+
+	<!-- Access resource bundles with the specified basename -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
+		p:basename="/WEB-INF/messages" />
 
 	<!-- Prepend /WEB-INF/jsp/ and append .jsp to the view name -->
 	<bean id="viewResolver"
@@ -19,10 +26,11 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
-	<!-- Access resource bundles with the specified basename -->
-	<bean id="messageSource"
-		class="org.springframework.context.support.ReloadableResourceBundleMessageSource"
-		p:basename="/WEB-INF/messages" />
+	<!-- Auto-detect controllers in this package >
+	<context:component-scan base-package="springGameTest.web" /-->
+ 
+    <!-- Enables the Spring MVC @Controller programming model >
+    <mvc:annotation-driven /-->
     
 
 </beans>
