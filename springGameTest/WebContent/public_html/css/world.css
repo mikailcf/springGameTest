@@ -3,7 +3,7 @@ body.primary {
 }
 
 h1 {
-	font-family: Verdana, Geneva, sans-serif;
+    font-family:Georgia,"Times New Roman",Times,serif;
 	font-size: 1.2em;
 	font-weight: normal;
 	color: Black;
@@ -11,7 +11,7 @@ h1 {
 }
 
 h2 {
-	font-family: Verdana, Geneva, sans-serif;
+    font-family:Georgia,"Times New Roman",Times,serif;
 	font-size: 1.1em;
 	font-weight: normal;
 	color: Black;
