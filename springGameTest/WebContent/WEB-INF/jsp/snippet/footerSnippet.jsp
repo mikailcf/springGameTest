@@ -1,4 +1,1 @@
-			</div>
-		</td>
-	</table>
-	<div valign="bottom" align="center">footer</div>
+<div valign="bottom" align="center">footer</div>

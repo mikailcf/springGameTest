@@ -1,8 +1,7 @@
-<h1 align="center">
-	<spring:message code="application.name" />
-</h1>
+	<h1 align="center">
+		<spring:message code="application.name" />
+	</h1>
 
-<div class="menu">
 	<table class="silver">
 		<tr>
 			<td>
@@ -43,4 +42,3 @@
 			</td>
 		</tr>
 	</table>
-</div>
