@@ -4,15 +4,15 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 <html>
-<head>
-<link rel="stylesheet" href="./public_html/css/world.css" type="text/css"/>
-<title><spring:message code="application.name"/>
-</title>
-</head>
-<body class="primary">
-<%@ include file="snippet/mainSnippet.jsp"%>
-<%@ include file="snippet/marketSnippet.jsp"%>
-<%@ include file="snippet/eventSnippet.jsp"%>
-<%@ include file="snippet/footerSnippet.jsp"%>
-</body>
+   <head>
+      <link rel="stylesheet" href="./public_html/css/world.css" type="text/css"/>
+      <title><spring:message code="application.name"/>
+      </title>
+   </head>
+   <body class="primary">
+      <%@ include file="snippet/mainSnippet.jsp"%>
+      <%@ include file="snippet/marketSnippet.jsp"%>
+      <%@ include file="snippet/eventSnippet.jsp"%>
+      <%@ include file="snippet/footerSnippet.jsp"%>
+   </body>
 </html>

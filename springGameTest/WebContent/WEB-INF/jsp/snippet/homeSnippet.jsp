@@ -1,3 +1,4 @@
+<div class="home">
 	<h2 align="center">
 		<spring:message code="game.home"/>
 	</h2>
@@ -29,3 +30,4 @@
 			</tr>
 		</c:forEach>
 	</table>
+</div>

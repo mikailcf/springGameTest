@@ -1,4 +1,4 @@
-<div class="event"> <div class="page">
+<div class="event">
 	<h2 align="center">
 		<spring:message code="game.events"/>
 	</h2><br>
@@ -17,4 +17,4 @@
 	<c:forEach items="${info.getSkillList()}" var="skill">
 			${skill.toString()}<br>
 	</c:forEach>
-</div></div>
+</div>

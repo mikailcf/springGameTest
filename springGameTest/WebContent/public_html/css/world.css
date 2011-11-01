@@ -25,15 +25,27 @@ text.new {
 
 .header {
     position: relative;
-/*    margin-left: auto;*/
-/*    margin-right: auto;*/
 }
 
 .menu {
     float: left;
 }
 
+.home {
+    position: relative;
+    margin-left: 10em;
+    float: left;
+    width: 30em;
+}
+
 .workbench {
+    position: relative;
+    margin-left: 10em;
+    float: left;
+    width: 30em;
+}
+
+.market {
     position: relative;
     margin-left: 10em;
     float: left;
@@ -50,10 +62,11 @@ text.new {
     text-align: center;
     clear: both;
     position: relative;
-/*    margin-left: auto;*/
-/*    margin-right: auto;*/
     bottom: -2em;
-/*    width: 30em;*/
+}
+
+.header, .menu, .home, .workbench, .market, .event, .footer {
+    background: Wheat;
 }
 
 a {
