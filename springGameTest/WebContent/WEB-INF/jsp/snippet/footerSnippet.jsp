@@ -1,1 +1,3 @@
-<div valign="bottom" align="center">footer</div>
+<div class="footer"> <div class="page">
+   footer
+</div></div>

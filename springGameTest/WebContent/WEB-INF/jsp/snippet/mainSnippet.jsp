@@ -1,6 +1,8 @@
-<h1 align="center">
-	<spring:message code="application.name" />
-</h1>
+<div class="header"> <div class="page">
+   <h1 align="center">
+   	<spring:message code="application.name" />
+   </h1>
+</div></div>
 
 <div class="menu">
 	<table class="silver">
