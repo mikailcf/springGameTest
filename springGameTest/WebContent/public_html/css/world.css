@@ -1,17 +1,18 @@
 body.primary {
+    font-family: 'Mate SC', serif;
 	background: url(../resources/primary_background.jpg) repeat left top; 
 }
 
 h1 {
-    font-family:Georgia,"Times New Roman",Times,serif;
-	font-size: 1.2em;
+    font-family: 'Mate', serif;
+	font-size: 2.0em;
 	font-weight: normal;
 	color: Black;
 	margin: 0.4em 0.4em 0.4em 0.4em;
 }
 
 h2 {
-    font-family:Georgia,"Times New Roman",Times,serif;
+    font-family: 'Mate', serif;
 	font-size: 1.1em;
 	font-weight: normal;
 	color: Black;
@@ -28,6 +29,8 @@ text.new {
 }
 
 .menu {
+    font-family: 'Mate SC', serif;
+	font-size: 1.1em;
     float: left;
 }
 
@@ -66,7 +69,7 @@ text.new {
 }
 
 .header, .menu, .home, .workbench, .market, .event, .footer {
-    background: Wheat;
+    background: rgba(254, 230, 200, 0.8);
 }
 
 a {

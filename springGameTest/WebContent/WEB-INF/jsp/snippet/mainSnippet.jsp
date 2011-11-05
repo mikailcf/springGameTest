@@ -1,3 +1,5 @@
+<link href='http://fonts.googleapis.com/css?family=Mate+SC' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Mate' rel='stylesheet' type='text/css'>
 <div class="header">
    <h1 align="center">
    	<spring:message code="application.name" />
