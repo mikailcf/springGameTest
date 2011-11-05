@@ -1,4 +1,4 @@
-<div class="workbench">
+<div class="workbench"><div class="center">
    <h2 align="center">
    	<spring:message code="game.workbench"/>
    </h2>

@@ -35,18 +35,12 @@ text.new {
 }
 
 .home {
-    margin: auto;
-    width: 30em;
 }
 
 .workbench {
-    margin: auto;
-    width: 30em;
 }
 
 .market {
-    margin: auto;
-    width: 30em;
 }
 
 .event {
@@ -61,7 +55,12 @@ text.new {
     bottom: -2em;
 }
 
-.header, .menu, .home, .workbench, .market, .event, .footer {
+.center {
+    margin: auto;
+    width: 30em;
+}
+
+.header, .menu, .center, .event, .footer {
     background: rgba(254, 230, 200, 0.8);
 }
 

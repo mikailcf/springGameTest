@@ -1,4 +1,4 @@
-<div class="market">
+<div class="market"><div class="center">
    <h2 align="center">
 		<spring:message code="game.market"/>
 	</h2>
@@ -44,4 +44,4 @@
 			</tr>
 		</c:forEach>
 	</table>
-</div>
+</div></div>
