@@ -1,3 +1,9 @@
 .DS_Store
 build.xml
 *.class
+lib
+dist
+nogo-server
+go-server
+.classpath
+*.tmproj
