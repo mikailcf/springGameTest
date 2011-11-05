@@ -11,8 +11,8 @@
    </head>
    <body class="primary">
       <%@ include file="snippet/mainSnippet.jsp"%>
-      <%@ include file="snippet/workbenchSnippet.jsp"%>
       <%@ include file="snippet/eventSnippet.jsp"%>
+      <%@ include file="snippet/workbenchSnippet.jsp"%>
       <%@ include file="snippet/footerSnippet.jsp"%>
    </body>
 </html>

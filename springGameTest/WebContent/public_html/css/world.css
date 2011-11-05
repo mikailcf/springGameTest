@@ -35,28 +35,21 @@ text.new {
 }
 
 .home {
-    position: relative;
-    margin-left: 10em;
-    float: left;
+    margin: auto;
     width: 30em;
 }
 
 .workbench {
-    position: relative;
-    margin-left: 10em;
-    float: left;
+    margin: auto;
     width: 30em;
 }
 
 .market {
-    position: relative;
-    margin-left: 10em;
-    float: left;
+    margin: auto;
     width: 30em;
 }
 
 .event {
-    position: relative;
     float: right;
     width: 20em;
 }
